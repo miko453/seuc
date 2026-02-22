@@ -14,77 +14,85 @@ export const ANNOUNCEMENTS = [
   "重要：由于硬盘读取头被老鼠偷走，所有数据现由人工口述。"
 ];
 
-export const PRODUCTS = [
+export type ProductConfig = {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  unit: string;
+  category: string;
+  features: string[];
+  options: {
+    label: string;
+    items: string[];
+    hint: string;
+  }[];
+};
+
+export const PRODUCTS: ProductConfig[] = [
   {
-    id: "vps-hyper",
+    id: "vps",
     title: "VPS (极致超开版)",
     description: "单核心支持 200 个实例并行。CPU 争抢率高达 99.9%，适合喜欢排队的用户。",
     price: "0.01",
     unit: "秒",
     category: "Compute",
-    features: ["1:200 超卖", "信仰级负载", "随机重启"]
+    features: ["1:200 超卖", "信仰级负载", "随机重启"],
+    options: [
+      { label: "超开倍率", items: ["1:10 (入门被绿)", "1:100 (资深受害者)", "1:9999 (性能全靠吹)"], hint: "倍率越高，你的 CPU 越像个摆设。" },
+      { label: "散热方案", items: ["蒲扇手摇", "嘴吹散热", "冰块直接泼"], hint: "建议选冰块，虽然主板会炸，但那一瞬间它是凉快的。" }
+    ]
   },
   {
-    id: "vds-box",
-    title: "VDS (鞋盒专用版)",
-    description: "基于村长家旧鞋盒里的树莓派。独享 1% 的电力供应，性能极其‘稳定’。",
-    price: "15.00",
-    unit: "月",
-    category: "Compute",
-    features: ["物理隔绝(鞋盒)", "手摇发电优先", "带土味情话"]
-  },
-  {
-    id: "vpn-neighbor",
+    id: "vpn",
     title: "VPN (老王转发版)",
     description: "流量通过老王家洗衣机智能路由。支持全村加密，虽然老王能看见你的记录。",
     price: "5.00",
     unit: "兆",
     category: "Network",
-    features: ["老王嗅探加密", "洗衣机式重传", "速度看缘分"]
+    features: ["老王嗅探加密", "洗衣机式重传", "速度看缘分"],
+    options: [
+      { label: "出口节点", items: ["老王家地窖", "村口王奶奶床下", "村长家大黄狗项圈"], hint: "出口取决于谁家网线没被狗啃。" },
+      { label: "加密协议", items: ["肉眼加密", "密信(鸽子传)", "大声喊出来"], hint: "肉眼加密最安全，只要没人看你的屏幕。" }
+    ]
   },
   {
-    id: "paas-run",
-    title: "PaaS (跑路即服务)",
-    description: "自动部署，自动销毁，自动跑路。一站式解决您的资产过剩问题。",
-    price: "99.9",
-    unit: "次",
-    category: "Platform",
-    features: ["一键销毁证据", "离岸代码托管", "跑路路线规划"]
-  },
-  {
-    id: "saas-snark",
-    title: "SaaS (阴阳怪气即服务)",
-    description: "内置 AI 机器人，会在你代码报错时进行 360 度无死角的嘲讽。",
-    price: "2.50",
-    unit: "句",
-    category: "Software",
-    features: ["全自动抬杠", "精神内耗加倍", "支持多方言"]
-  },
-  {
-    id: "cdn-pigeon",
+    id: "cdn",
     title: "CDN (信鸽缓存)",
     description: "利用 50 只职业信鸽进行数据包物理加速。延迟以鸽子飞行速度为准。",
     price: "1.20",
     unit: "鸽",
     category: "Edge",
-    features: ["抗干扰(禁放鞭炮)", "物理边缘节点", "自带鸟食费用"]
+    features: ["抗干扰(禁放鞭炮)", "物理边缘节点", "自带鸟食费用"],
+    options: [
+      { label: "信鸽等级", items: ["老弱病残(便宜)", "壮年鸽(偶尔偷懒)", "战斗鸽(会攻击竞对)"], hint: "战斗鸽有概率把隔壁阿里的网线啄断。" },
+      { label: "回源策略", items: ["飞回去问", "等它飞累了", "随缘获取"], hint: "建议选随缘，反正它可能在半路被老鹰抓走。" }
+    ]
   },
   {
-    id: "pages-schrodinger",
-    title: "Pages (薛定谔静态页)",
-    description: "只有在你刷新 5 次以上才会出现的静态网页服务。主打一个缘分。",
-    price: "0.00",
-    unit: "永久",
-    category: "Web",
-    features: ["概率性上线", "不支持 HTTPS", "送村口草席一张"]
+    id: "paas",
+    title: "PaaS (跑路即服务)",
+    description: "自动部署，自动销毁，自动跑路。一站式解决您的资产过剩问题。",
+    price: "99.9",
+    unit: "次",
+    category: "Platform",
+    features: ["一键销毁证据", "离岸代码托管", "跑路路线规划"],
+    options: [
+      { label: "跑路速度", items: ["慢走(等客户骂)", "小跑(带走显示器)", "瞬间蒸发(极致体验)"], hint: "瞬间蒸发模式下，连我们客服的微信都会注销。" },
+      { label: "资产转移", items: ["转给老王", "换成冥币", "捐给慈善(自创)"], hint: "通常我们会选择换成冥币，让您的财富在另一个世界继续增值。" }
+    ]
   },
   {
-    id: "db-cat",
+    id: "db",
     title: "Database (猫尿备份版)",
     description: "数据实时保存在猫窝。虽然不可靠，但它确实存在（可能）。",
     price: "8.00",
     unit: "次",
     category: "Storage",
-    features: ["猫砂级压缩", "数据‘禅意’丢失", "无法恢复"]
+    features: ["猫砂级压缩", "数据‘禅意’丢失", "无法恢复"],
+    options: [
+      { label: "备份介质", items: ["湿润猫砂", "村口古井", "技术员的大脑"], hint: "技术员最近记性不太好，请谨慎选择。" },
+      { label: "恢复逻辑", items: ["靠求神拜佛", "靠重买一台", "放弃执念"], hint: "我们数据库最大的特点就是不需要恢复，因为根本没存上。" }
+    ]
   }
 ];
