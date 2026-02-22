@@ -1,3 +1,4 @@
+
 export const ANNOUNCEMENTS = [
   "Compute Engine: 节点 '老王家-1' 因发电机没油已自动关机。",
   "Cloud Storage: 存储桶 '地窖-图片' 因渗水出现位反转。",
@@ -62,6 +63,16 @@ export const PRODUCTS: ProductConfig[] = [
     options: COMMON_SERVER_OPTIONS
   },
   {
+    id: "vds-dedicated",
+    title: "VDS 虚拟独享服务器",
+    description: "真正的独占资源（指村长不用电脑的时候）。",
+    price: "45.00",
+    unit: "月",
+    category: "计算",
+    features: ["物理核映射", "独占内存", "稳定性提升 0.1%"],
+    options: COMMON_SERVER_OPTIONS
+  },
+  {
     id: "gpu-beast",
     title: "GPU 服务器 (GTX 440 胶带版)",
     description: "通过透明胶带并联的垃圾显卡阵列。支持扫雷 4K，是村里最顶级的算力。",
@@ -75,51 +86,19 @@ export const PRODUCTS: ProductConfig[] = [
     ]
   },
   {
-    id: "rdp-shared",
-    title: "RDP 共享服务器",
-    description: "多人共用一个桌面。您可以实时看到邻居在改什么代码。",
-    price: "5.00",
-    unit: "月",
-    category: "计算",
-    features: ["共享 RDP 会话", "强制多端登录", "隐私全无"],
-    options: COMMON_SERVER_OPTIONS
-  },
-  {
-    id: "preemptible-vps",
-    title: "低优先级可抢占实例",
-    description: "随时可能关机。取决于技术员小王是否需要用这台机器打 4399。",
-    price: "1.00",
-    unit: "月",
-    category: "计算",
-    features: ["秒级关机", "不保存数据", "价格极低"],
-    options: COMMON_SERVER_OPTIONS
-  },
-
-  // --- 物理与半物理 (Bare / Physical) ---
-  {
     id: "bare-metal-chief",
     title: "裸金属服务器 (村长办公机)",
-    description: "独占村长家 2008 年采购的联想台式机。性能卓越（指开机只需 3 分钟）。",
+    description: "独占村长家 2008 年采购的联想台式机。开机只需 3 分钟。",
     price: "299.00",
     unit: "月",
     category: "物理",
     features: ["物理机独占", "真实噪音体验", "手动开关机"],
     options: COMMON_SERVER_OPTIONS
   },
-  {
-    id: "cabinet-slice",
-    title: "机柜级服务器 (共享机柜)",
-    description: "租用整个咸菜缸机柜的一角。包含一份地窖排水保险。",
-    price: "150.00",
-    unit: "月",
-    category: "物理",
-    features: ["机柜托管", "物理级防护", "防鼠防火防村长"],
-    options: COMMON_SERVER_OPTIONS
-  },
 
   // --- 网络与带宽 (Network) ---
   {
-    id: "nat-套娃",
+    id: "nat-taowa",
     title: "NAT 云服务器 (18层套娃)",
     description: "极致转发。您的 IP 地址可能在半个村子流转后才到达出口。",
     price: "2.50",
@@ -129,13 +108,23 @@ export const PRODUCTS: ProductConfig[] = [
     options: COMMON_SERVER_OPTIONS
   },
   {
-    id: "ipv6-only-instance",
-    title: "IPv6 Only 实例 (纯净版)",
-    description: "拒绝陈旧协议。由于村里没有 IPv6 环境，该实例目前处于无法访问状态。",
+    id: "cdn-pigeon-pro",
+    title: "信鸽全球加速 (CDN)",
+    description: "通过信鸽叼着 SD 卡分发数据。延迟以鸽子的体力为准。",
     price: "0.50",
+    unit: "GB",
+    category: "托管",
+    features: ["动态调度", "物理缓存", "全村分发"],
+    options: COMMON_SERVER_OPTIONS
+  },
+  {
+    id: "dns-loudspeaker",
+    title: "大喇叭解析服务 (DNS)",
+    description: "播音员大喊一声即可解析。支持智能分发（大喊/小喊）。",
+    price: "1.00",
     unit: "月",
     category: "网络",
-    features: ["纯 IPv6", "绝对隔离", "暂不可用"],
+    features: ["模拟信号", "人工解析", "嗓门加密"],
     options: COMMON_SERVER_OPTIONS
   },
 
@@ -148,28 +137,6 @@ export const PRODUCTS: ProductConfig[] = [
     unit: "GB/月",
     category: "存储",
     features: ["三副本缸体", "物理封盖", "读取靠挖"],
-    options: COMMON_SERVER_OPTIONS
-  },
-  {
-    id: "backup-not-guaranteed",
-    title: "备份但不保证可恢复存储",
-    description: "写入成功即代表我们努力过。至于恢复，那是玄学范畴。",
-    price: "0.05",
-    unit: "GB/月",
-    category: "存储",
-    features: ["单副本备份", "异步丢失", "心理安慰"],
-    options: COMMON_SERVER_OPTIONS
-  },
-
-  // --- 托管与传统服务 (Hosting) ---
-  {
-    id: "wp-hosting-village",
-    title: "WordPress 托管 (村委会专用)",
-    description: "预装各种广场舞主题。自带老王家 WiFi 自动重连插件。",
-    price: "15.00",
-    unit: "月",
-    category: "托管",
-    features: ["一键安装", "全村可见", "自带后门"],
     options: COMMON_SERVER_OPTIONS
   },
 
@@ -187,57 +154,53 @@ export const PRODUCTS: ProductConfig[] = [
   {
     id: "waf-dog-standard",
     title: "大黄狗 WAF",
-    description: "村口大黄狗监控。发现异常流量会引发狗叫，从而通过音频警告黑客。",
+    description: "村口大黄狗监控。发现异常流量会引发狗叫警告。",
     price: "35.00",
     unit: "月",
     category: "安全",
     features: ["生物识别", "声控拦截", "自动咬网线"],
     options: COMMON_SERVER_OPTIONS
   },
-
-  // --- 边缘 / Serverless ---
   {
-    id: "edge-unstable",
-    title: "边缘不稳定计算节点",
-    description: "部署在村东头的电线杆上。下雨天自动触发 Failover（指停电）。",
-    price: "10.00",
-    unit: "月",
-    category: "平台",
-    features: ["边缘覆盖", "天气敏感", "随机丢包"],
-    options: COMMON_SERVER_OPTIONS
-  },
-
-  // --- 网络服务 (Service) ---
-  {
-    id: "cdn-pigeon-pro",
-    title: "信鸽全球加速 (CDN)",
-    description: "通过信鸽叼着 SD 卡分发数据。延迟以鸽子的体力为准。",
-    price: "0.50",
-    unit: "GB",
-    category: "网络",
-    features: ["动态调度", "物理缓存", "全村分发"],
-    options: COMMON_SERVER_OPTIONS
-  },
-  {
-    id: "dns-loudspeaker",
-    title: "大喇叭解析服务 (DNS)",
-    description: "播音员大喊一声即可解析。支持智能分发（大喊/小喊）。",
-    price: "1.00",
-    unit: "月",
-    category: "网络",
-    features: ["模拟信号", "人工解析", "嗓门加密"],
+    id: "ddos-cut-wire",
+    title: "物理断网 DDoS 防护",
+    description: "检测到流量过载时，技术员小王会立即剪断网线，防御成功率 100%。",
+    price: "500.00",
+    unit: "次",
+    category: "安全",
+    features: ["绝对防御", "纯物理隔离", "手动重连"],
     options: COMMON_SERVER_OPTIONS
   },
 
   // --- 其他 ---
   {
-    id: "test-server-trash",
-    title: "测试用服务器 (数字垃圾桶)",
-    description: "虽然名字叫服务器，但其实只是一个正在运行的 ping 命令。",
-    price: "0.10",
-    unit: "天",
+    id: "email-pigeon-relay",
+    title: "信鸽邮件转发服务器",
+    description: "基于 IPoAC 协议的专业邮件网关。防洪防弹防老鹰。",
+    price: "15.00",
+    unit: "月",
     category: "其他",
-    features: ["仅供测试", "随时消失", "无保修"],
+    features: ["高可靠性", "信鸽加密", "支持超大附件(128G SD卡)"],
+    options: COMMON_SERVER_OPTIONS
+  },
+  {
+    id: "ssl-stamp",
+    title: "村长亲自盖章 SSL",
+    description: "完全手工颁发的证书。村长手写签名，全村信任。",
+    price: "19.00",
+    unit: "年",
+    category: "安全",
+    features: ["人工颁发", "红头文件加密", "支持多域名"],
+    options: COMMON_SERVER_OPTIONS
+  },
+  {
+    id: "beian-tea",
+    title: "代办备案 (两包烟套餐)",
+    description: "由技术员小王去镇上跑腿。包含路费和买烟钱。",
+    price: "50.00",
+    unit: "次",
+    category: "平台",
+    features: ["快速通道", "关系网映射", "免面试"],
     options: COMMON_SERVER_OPTIONS
   }
 ];

@@ -1,9 +1,11 @@
+
 "use client";
 
 import { 
   Zap, ArrowRight,
   Wifi, Database, Terminal,
-  CloudOff, Network, Cpu, HardDrive, ShoppingCart, Globe, Signal, Activity, ShieldCheck
+  CloudOff, Network, Cpu, HardDrive, ShoppingCart, Globe, Signal, Activity, ShieldCheck,
+  MapPin, CheckCircle, Users, BarChart3
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -59,25 +61,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-16 bg-white border-b border-primary/5">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground mb-12 flex items-center justify-center gap-4">
-            <div className="h-px w-24 bg-muted" />
-            全球顶级（村级）机构的共同选择
-            <div className="h-px w-24 bg-muted" />
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 items-center grayscale opacity-40 hover:opacity-100 transition-all duration-700">
-            {PARTNERS.map((partner, i) => (
-              <div key={i} className="flex flex-col items-center justify-center gap-3 group cursor-help hover:scale-110 transition-transform">
-                <partner.icon className="h-8 w-8 text-foreground group-hover:text-primary transition-colors" />
-                <span className="text-[12px] font-black italic tracking-tighter whitespace-nowrap">{partner.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Stats Section */}
       <section className="py-16 bg-card border-b border-primary/10 shadow-inner">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12">
@@ -100,13 +83,68 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Global Infrastructure Map (Village Edition) */}
+      <section className="py-32 bg-muted/30 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-20">
+            <Badge className="bg-accent/10 text-accent border-accent/20 uppercase font-black tracking-widest">Global Base</Badge>
+            <h2 className="text-6xl font-headline font-black italic tracking-tighter">全球基建分布 (村落级)</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto italic font-medium">
+              我们的边缘节点遍布大槐树村每一个角落，从村头老王家到村尾二狗子地窖，实现真正的“全村覆盖”。
+            </p>
+          </div>
+          
+          <div className="relative aspect-[21/9] bg-white rounded-3xl border-4 border-primary/20 overflow-hidden shadow-2xl">
+            <div className="absolute inset-0 opacity-10 grayscale">
+              {/* Simplified Village Map Visualization */}
+              <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#22c55e_1px,_transparent_1px)] bg-[length:24px_24px]" />
+            </div>
+            
+            {/* Pulsing Nodes */}
+            <div className="absolute top-1/4 left-1/4 group cursor-help">
+              <div className="relative h-4 w-4 bg-primary rounded-full animate-pulse" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-black text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">村头电线杆 (核心网)</div>
+            </div>
+            <div className="absolute top-1/2 left-1/2 group cursor-help">
+              <div className="relative h-4 w-4 bg-accent rounded-full animate-pulse" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-black text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">村委会 (IDC 总部)</div>
+            </div>
+            <div className="absolute bottom-1/4 right-1/3 group cursor-help">
+              <div className="relative h-4 w-4 bg-destructive rounded-full animate-pulse" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-black text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">地窖机房 (冷数据区)</div>
+            </div>
+            <div className="absolute top-1/3 right-1/4 group cursor-help">
+              <div className="relative h-4 w-4 bg-primary rounded-full animate-pulse" />
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-black text-white text-[8px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">老王家后院 (边缘节点)</div>
+            </div>
+
+            <div className="absolute bottom-4 left-4 flex gap-4">
+              <div className="flex items-center gap-1 text-[10px] font-mono font-bold"><div className="h-2 w-2 bg-primary rounded-full" /> 正常运行</div>
+              <div className="flex items-center gap-1 text-[10px] font-mono font-bold"><div className="h-2 w-2 bg-accent rounded-full" /> 正在冒烟</div>
+              <div className="flex items-center gap-1 text-[10px] font-mono font-bold"><div className="h-2 w-2 bg-destructive rounded-full" /> 已经火化</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Victims Ticker */}
+      <section className="bg-primary py-4 overflow-hidden border-y-4 border-black">
+        <div className="flex whitespace-nowrap animate-marquee font-black italic text-white uppercase tracking-tighter text-2xl">
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className="mx-8 flex items-center gap-4">
+              <Users className="h-6 w-6" /> 恭喜用户 dawayuanzhong_{i} 成功入坑
+              <CheckCircle className="h-6 w-6" /> 恭喜用户 victim_{i*123} 成功被绿
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Featured Products */}
       <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="space-y-4">
             <Badge variant="outline" className="border-primary text-primary font-black uppercase tracking-widest px-4 py-1">HOT PRODUCTS</Badge>
             <h2 className="text-6xl font-headline font-black italic tracking-tighter text-foreground">本月最火受骗入口</h2>
-            <p className="text-muted-foreground font-medium italic">“地窖算力，极致被绿。”</p>
           </div>
           <Button variant="link" className="text-primary font-black text-lg h-auto p-0 hover:no-underline group" asChild>
             <Link href="/products" className="flex items-center">
@@ -122,7 +160,6 @@ export default function Home() {
               icon: Cpu, 
               price: "88.00", 
               desc: "顶级算力（指扫雷），全靠地窖发电机维持。",
-              tags: ["超开 1:100", "手动散热"],
               href: "/products/gpu-beast"
             },
             { 
@@ -130,15 +167,13 @@ export default function Home() {
               icon: Network, 
               price: "5.00", 
               desc: "共享 IP 极致转发。您的出口可能在村长办公室。",
-              tags: ["地狱延迟", "IP 漂移"],
-              href: "/products/vps-elastic"
+              href: "/products/nat-taowa"
             },
             { 
-              title: "VDS (独占死机版)", 
+              title: "VDS (独占虚拟机)", 
               icon: Activity, 
               price: "45.00", 
               desc: "KVM 架构独占村长电脑核。不会被邻居抢带宽。",
-              tags: ["独占资源", "物理隔离"],
               href: "/products/vds-dedicated"
             }
           ].map((product, i) => (
@@ -179,6 +214,17 @@ export default function Home() {
           </p>
         </div>
       </section>
+      
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: inline-flex;
+          animation: marquee 20s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }
