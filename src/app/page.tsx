@@ -1,9 +1,11 @@
+
 "use client";
 
 import { 
   Zap, ShieldCheck, Activity, Globe, 
   Cpu, HardDrive, ShoppingCart, ArrowRight,
-  Bird, Wifi, Database, Search
+  Bird, Wifi, Database, Search, Terminal,
+  CloudOff, Server, LayoutGrid, Building2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,6 +13,15 @@ import { Badge } from "@/components/ui/badge";
 import { HeroAnnouncement } from "@/components/HeroAnnouncement";
 import { DynamicOutageList } from "@/components/DynamicOutageList";
 import Link from "next/link";
+
+const PARTNERS = [
+  { name: "TP-LINK (地窖定制版)", icon: Wifi },
+  { name: "邻居老王 WiFi 实验室", icon: Zap },
+  { name: "大槐树村委会大数据局", icon: Database },
+  { name: "拼夕夕云 (战略被绿伙伴)", icon: ShoppingCart },
+  { name: "村口超市 POS 结算中心", icon: Terminal },
+  { name: "张三家手摇发电机组", icon: Cpu },
+];
 
 export default function Home() {
   return (
@@ -39,11 +50,6 @@ export default function Home() {
                   <Link href="/nodes">查看实时瘫痪探针</Link>
                 </Button>
               </div>
-              <div className="flex items-center gap-6 pt-4 grayscale opacity-40">
-                <div className="flex items-center gap-2 font-black italic text-sm">TP-LINK</div>
-                <div className="flex items-center gap-2 font-black italic text-sm">邻居老王</div>
-                <div className="flex items-center gap-2 font-black italic text-sm">大槐树村委</div>
-              </div>
             </div>
 
             <div className="relative">
@@ -52,6 +58,23 @@ export default function Home() {
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section (Mocking Big Cloud Providers) */}
+      <section className="py-12 bg-muted/30 border-b border-primary/5">
+        <div className="max-w-7xl mx-auto px-4">
+          <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-8">
+            全球顶级（村级）机构的共同选择
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center grayscale opacity-40 hover:opacity-100 transition-opacity duration-500">
+            {PARTNERS.map((partner, i) => (
+              <div key={i} className="flex items-center justify-center gap-2 group cursor-help">
+                <partner.icon className="h-4 w-4 text-foreground" />
+                <span className="text-[11px] font-black italic tracking-tighter whitespace-nowrap">{partner.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -83,7 +106,7 @@ export default function Home() {
         <div className="flex justify-between items-end mb-12">
           <div>
             <Badge variant="outline" className="mb-4 border-primary text-primary">明星业务</Badge>
-            <h2 className="text-4xl font-headline font-black italic tracking-tighter">本月最火受骗入口</h2>
+            <h2 className="text-4xl font-headline font-black italic tracking-tighter text-foreground">本月最火受骗入口</h2>
           </div>
           <Button variant="link" className="text-primary font-bold" asChild>
             <Link href="/products">查看全部全线业务 <ArrowRight className="ml-1 h-4 w-4" /></Link>
@@ -114,7 +137,7 @@ export default function Home() {
               tags: ["防潮备份", "内存即焚"]
             }
           ].map((product, i) => (
-            <Card key={i} className="group hover:border-primary transition-all duration-300 overflow-hidden">
+            <Card key={i} className="group hover:border-primary transition-all duration-300 overflow-hidden shadow-md">
               <CardContent className="p-8 space-y-6">
                 <div className="h-14 w-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                   <product.icon className="h-8 w-8" />
@@ -137,7 +160,7 @@ export default function Home() {
                     </div>
                   </div>
                   <Button className="bg-primary text-white font-bold h-12 px-6" asChild>
-                    <Link href="/products">选购</Link>
+                    <Link href={`/products`}>立即受骗</Link>
                   </Button>
                 </div>
               </CardContent>
