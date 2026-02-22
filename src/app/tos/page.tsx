@@ -1,7 +1,6 @@
 
 "use client";
 
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeft, Ghost, ShieldAlert } from "lucide-react";
@@ -9,9 +8,8 @@ import { ChevronLeft, Ghost, ShieldAlert } from "lucide-react";
 export default function TOSPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <main className="max-w-2xl mx-auto px-4 py-32 text-center">
-        <Link href="/" className="inline-flex items-center text-sm text-primary hover:underline mb-12">
+        <Link href="/" className="inline-flex items-center text-sm text-primary font-bold hover:underline mb-12">
           <ChevronLeft className="h-4 w-4 mr-1" /> 回家种地吧
         </Link>
         
@@ -25,8 +23,8 @@ export default function TOSPage() {
         </header>
 
         <section className="space-y-12">
-          <div className="relative p-12 border-4 border-primary shadow-[0_0_30px_rgba(34,197,94,0.1)] rounded-xl bg-card">
-            <h2 className="text-8xl font-black text-primary opacity-90 animate-glitch tracking-tighter mb-8">
+          <div className="relative p-12 border-4 border-primary shadow-[0_0_30px_rgba(34,197,94,0.15)] rounded-xl bg-card">
+            <h2 className="text-8xl font-black text-primary opacity-90 animate-glitch tracking-tighter mb-8 italic">
               谁看啊？
             </h2>
             <p className="text-muted-foreground font-mono text-sm leading-relaxed">
@@ -36,18 +34,18 @@ export default function TOSPage() {
               <br /><br />
               1. 随时随地卷钱跑路。
               <br />
-              2. 把你的数据卖给村口的李大妈。
+              2. 把你的数据卖给村口的李大妈，由她决定是否需要帮您手动找回。
               <br />
-              3. 在你网站宕机时在大厅播放广场舞乐曲。
+              3. 在你网站宕机时在大厅循环播放广场舞乐曲以缓解焦虑。
             </p>
           </div>
 
           <div className="p-6 bg-destructive/5 border border-destructive/20 rounded-lg italic text-[10px] text-muted-foreground font-mono">
-            提示：本条款每隔 5 秒会自动随机修改一次，取决于村长的心情。
+            提示：本条款每隔 5 秒会自动随机修改一次，取决于村长家大黄狗的心情。
           </div>
 
-          <Button size="lg" className="w-full bg-accent text-black font-black py-8 text-xl" asChild>
-            <Link href="/dashboard">我没看，但我同意被绿</Link>
+          <Button size="lg" className="w-full bg-accent text-black font-black py-8 text-xl shadow-xl hover:bg-accent/80" asChild>
+            <Link href="/products">我没看，但我同意被绿</Link>
           </Button>
         </section>
 

@@ -1,10 +1,8 @@
 
 "use client";
 
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   ShieldCheck, FileText, Camera, UserCheck, 
@@ -36,8 +34,6 @@ export default function BeianPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-      
       <main className="max-w-4xl mx-auto px-4 py-16">
         <header className="mb-12 text-center">
           <Badge variant="outline" className="border-primary/40 text-primary mb-4">
@@ -51,7 +47,7 @@ export default function BeianPage() {
           </p>
         </header>
 
-        <div className="grid md:grid-cols-4 gap-4 mb-12">
+        <div className="grid md:grid-cols-5 gap-4 mb-12">
           {BEIAN_STEPS.map((step) => (
             <div 
               key={step.id} 
@@ -66,7 +62,7 @@ export default function BeianPage() {
           ))}
         </div>
 
-        <Card className="border-4 border-primary bg-card/50 overflow-hidden">
+        <Card className="border-4 border-primary bg-card/50 overflow-hidden shadow-xl">
           <div className="bg-primary/10 p-4 border-b border-primary/20 flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Hourglass className="h-4 w-4 text-primary animate-spin" />
@@ -96,7 +92,7 @@ export default function BeianPage() {
                 <p className="text-sm font-bold text-destructive italic">
                   警告：由于村长下乡考察（去县城赶集），备案终审可能延迟 3 到 4 个世纪。
                 </p>
-                <Button className="bg-destructive hover:bg-destructive/80 text-white font-bold">
+                <Button className="bg-destructive hover:bg-destructive/80 text-white font-bold h-12">
                   给村长发红包 (加速 0.001%)
                 </Button>
               </div>

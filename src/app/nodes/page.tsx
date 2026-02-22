@@ -1,10 +1,9 @@
 
 "use client";
 
-import { Navigation } from "@/components/Navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Server, Wifi, Skull, Coffee, Flame, Radio, Signal, WifiOff, Bird } from "lucide-react";
+import { Wifi, Skull, Coffee, Flame, Signal, WifiOff, Bird } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type NodeStatus = {
@@ -42,11 +41,10 @@ export default function NodesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navigation />
-      <main className="max-w-7xl mx-auto px-4 py-16">
+    <div className="min-h-screen bg-background text-foreground py-16">
+      <main className="max-w-7xl mx-auto px-4">
         <header className="mb-12">
-          <h1 className="text-5xl font-headline font-bold italic text-primary tracking-tighter">
+          <h1 className="text-5xl font-headline font-black italic text-primary tracking-tighter">
             全球 <span className="text-accent underline decoration-4">瘫痪</span> 节点探针
           </h1>
           <p className="text-muted-foreground mt-2 font-mono uppercase tracking-widest text-sm">
@@ -56,7 +54,7 @@ export default function NodesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {nodes.map((node, i) => (
-            <Card key={i} className={`bg-card border-2 transition-all duration-700 ${
+            <Card key={i} className={`bg-card border-2 transition-all duration-700 shadow-lg ${
               node.status === 'online' ? 'border-primary/20' : 
               node.status === 'offline' ? 'border-destructive' : 
               node.status === 'fire' ? 'border-orange-500 animate-pulse' : 'border-accent/40'

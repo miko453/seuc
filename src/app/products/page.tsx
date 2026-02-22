@@ -1,14 +1,14 @@
+
 "use client";
 
-import { Navigation } from "@/components/Navigation";
 import { PRODUCTS } from "@/lib/satire-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
-  Server, Database, Network, HardDrive, LayoutGrid, 
+  Server, Database, HardDrive, LayoutGrid, 
   ChevronRight, ShoppingCart, Filter, Info, 
-  Cpu, Globe, Bird
+  Cpu, Globe
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -33,8 +33,8 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-16">
+    <div className="min-h-screen bg-background flex flex-col py-16">
+      <div className="max-w-7xl mx-auto w-full px-4">
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* WHMCS Style Sidebar Categories */}
@@ -54,7 +54,7 @@ export default function ProductsPage() {
                       className={`w-full text-left px-4 py-2.5 rounded text-sm transition-all flex items-center justify-between group ${
                         activeCategory === cat 
                         ? 'bg-primary text-white font-bold' 
-                        : 'hover:bg-primary/5 text-muted-foreground'
+                        : 'hover:bg-primary/5 text-muted-foreground font-medium'
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -98,7 +98,7 @@ export default function ProductsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredProducts.map(product => (
-                <Card key={product.id} className="bg-card border-primary/10 hover:border-primary transition-all flex flex-col group overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/5">
+                <Card key={product.id} className="bg-card border-primary/10 hover:border-primary transition-all flex flex-col group overflow-hidden shadow-lg hover:shadow-2xl">
                   <CardHeader className="p-6 border-b border-primary/5 bg-primary/[0.02]">
                     <div className="flex justify-between items-start mb-4">
                       <div className="p-3 bg-white rounded-xl shadow-sm border border-primary/5 text-primary">
@@ -129,7 +129,7 @@ export default function ProductsPage() {
                           <span className="text-[10px] text-muted-foreground">/{product.unit}</span>
                         </div>
                       </div>
-                      <Button size="lg" className="bg-primary hover:bg-primary/90 font-black px-6 h-12 gap-2 shadow-lg shadow-primary/10" asChild>
+                      <Button size="lg" className="bg-primary hover:bg-primary/90 font-black px-6 h-12 gap-2 shadow-lg" asChild>
                         <Link href={`/products/${product.id}`}>
                           <ShoppingCart className="h-4 w-4" /> 选购
                         </Link>
