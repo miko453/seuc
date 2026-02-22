@@ -1,3 +1,4 @@
+
 "use client";
 
 import { use, useEffect, useState } from "react";
@@ -12,13 +13,14 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Zap, AlertTriangle, ChevronLeft, Loader2, 
-  ShoppingCart, Hourglass, CheckCircle2, XCircle, Cpu, HardDrive, Network, Globe, Layers
+  ShoppingCart, Hourglass, CheckCircle2, XCircle, Cpu, HardDrive, Network, Globe, Layers, Boxes
 } from "lucide-react";
 import { 
   Dialog, DialogContent, DialogHeader, 
   DialogTitle, DialogDescription, DialogFooter 
 } from "@/components/ui/dialog";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -29,7 +31,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [progress, setProgress] = useState(0);
   const [orderResult, setOrderResult] = useState<{ success: boolean; message: string } | null>(null);
   
-  // Dynamic config states
   const [configValues, setConfigValues] = useState<Record<string, any>>({});
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
     let currentProgress = 0;
     const interval = setInterval(() => {
-      currentProgress += Math.random() * 15;
+      currentProgress += Math.random() * 12;
       if (currentProgress >= 100) {
         currentProgress = 100;
         clearInterval(interval);
@@ -69,7 +70,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           const reason = ORDER_FAIL_REASONS[Math.floor(Math.random() * ORDER_FAIL_REASONS.length)];
           setOrderResult({ success: false, message: reason });
           setIsProcessing(false);
-        }, 1000);
+        }, 1200);
       }
       setProgress(currentProgress);
       setCurrentEvent(QUEUE_EVENTS[Math.floor(Math.random() * QUEUE_EVENTS.length)]);
@@ -80,9 +81,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     setConfigValues(prev => ({ ...prev, [label]: value }));
   };
 
+  const getOptionIcon = (label: string) => {
+    const l = label.toLowerCase();
+    if (l.includes('cpu') || l.includes('计算')) return <Cpu className="h-4 w-4 text-primary" />;
+    if (l.includes('内存') || l.includes('ram')) return <Zap className="h-4 w-4 text-primary" />;
+    if (l.includes('盘') || l.includes('空间') || l.includes('存储')) return <HardDrive className="h-4 w-4 text-primary" />;
+    if (l.includes('网') || l.includes('带') || l.includes('ip')) return <Globe className="h-4 w-4 text-primary" />;
+    if (l.includes('系统') || l.includes('环境') || l.includes('版本')) return <Layers className="h-4 w-4 text-primary" />;
+    return <Boxes className="h-4 w-4 text-primary" />;
+  };
+
   return (
-    <div className="min-h-screen bg-[#f8f9fa] pb-20">
-      <main className="max-w-6xl mx-auto px-4 py-12">
+    <div className="min-h-screen bg-[#f8f9fa] pb-20 pt-10">
+      <main className="max-w-6xl mx-auto px-4">
         <Link href="/products" className="inline-flex items-center text-sm text-primary hover:underline mb-8 font-bold">
           <ChevronLeft className="h-4 w-4 mr-1" /> 返回产品中心
         </Link>
@@ -107,15 +118,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <section key={idx} className="space-y-6">
                   <div className="flex justify-between items-center border-b border-primary/10 pb-2">
                     <h3 className="text-lg font-bold italic flex items-center gap-2">
-                      {option.label.includes('CPU') && <Cpu className="h-4 w-4 text-primary" />}
-                      {option.label.includes('内存') && <Zap className="h-4 w-4 text-primary" />}
-                      {option.label.includes('硬盘') || option.label.includes('空间') ? <HardDrive className="h-4 w-4 text-primary" /> : null}
-                      {option.label.includes('网络') || option.label.includes('带宽') ? <Globe className="h-4 w-4 text-primary" /> : null}
-                      {option.label.includes('操作系统') || option.label.includes('版本') ? <Layers className="h-4 w-4 text-primary" /> : null}
+                      {getOptionIcon(option.label)}
                       {option.label}
                     </h3>
                     {option.type === 'slider' && (
-                      <Badge variant="outline" className="text-accent border-accent font-mono">
+                      <Badge variant="outline" className="text-accent border-accent font-mono font-bold">
                         {configValues[option.label] || option.range?.min} {option.range?.unit}
                       </Badge>
                     )}
@@ -131,7 +138,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                         onValueChange={(val) => updateConfig(option.label, val[0])}
                         className="[&_.relative]:bg-primary"
                       />
-                      <div className="flex justify-between mt-2 text-[10px] font-mono opacity-50">
+                      <div className="flex justify-between mt-2 text-[10px] font-mono opacity-50 font-bold">
                         <span>{option.range.min} {option.range.unit}</span>
                         <span>{option.range.max} {option.range.unit}</span>
                       </div>
@@ -140,12 +147,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
                   {option.type === 'select' && (
                     <Select value={configValues[option.label]} onValueChange={(val) => updateConfig(option.label, val)}>
-                      <SelectTrigger className="w-full bg-white border-2 border-primary/10 h-12">
+                      <SelectTrigger className="w-full bg-white border-2 border-primary/10 h-14 text-base font-medium">
                         <SelectValue placeholder={`选择${option.label}...`} />
                       </SelectTrigger>
                       <SelectContent>
                         {option.items.map((item, i) => (
-                          <SelectItem key={i} value={item}>{item}</SelectItem>
+                          <SelectItem key={i} value={item} className="font-medium">{item}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -158,31 +165,36 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       onValueChange={(val) => updateConfig(option.label, val)}
                     >
                       {option.items.map((item, i) => (
-                        <div key={i} className={`flex items-center space-x-3 border-2 p-4 rounded-xl bg-white shadow-sm transition-all cursor-pointer group ${configValues[option.label] === item ? 'border-primary' : 'border-transparent hover:border-primary/40'}`}>
+                        <div key={i} className={cn(
+                          "flex items-center space-x-3 border-2 p-5 rounded-xl bg-white shadow-sm transition-all cursor-pointer group",
+                          configValues[option.label] === item ? 'border-primary ring-2 ring-primary/10 bg-primary/[0.02]' : 'border-border hover:border-primary/40'
+                        )}>
                           <RadioGroupItem value={item} id={`${idx}-${i}`} className="text-primary" />
                           <Label htmlFor={`${idx}-${i}`} className="flex flex-col cursor-pointer flex-1">
-                            <span className="font-bold text-sm group-hover:text-primary transition-colors">{item}</span>
+                            <span className="font-bold text-base group-hover:text-primary transition-colors">{item}</span>
                           </Label>
                         </div>
                       ))}
                     </RadioGroup>
                   )}
                   
-                  <p className="text-[11px] text-muted-foreground italic font-mono bg-primary/5 p-3 rounded-lg border border-primary/10">
-                    ⚠️ 风险提示：{option.hint}
-                  </p>
+                  <div className="text-[11px] text-muted-foreground italic font-mono bg-primary/5 p-3 rounded-lg border border-primary/10 flex items-start gap-2">
+                    <AlertTriangle className="h-3 w-3 mt-0.5 shrink-0 text-amber-500" />
+                    <span>⚠️ 风险提示：{option.hint}</span>
+                  </div>
                 </section>
               ))}
             </div>
 
-            <section className="p-8 border-4 border-dashed border-destructive/20 rounded-2xl bg-destructive/5 space-y-4">
+            <section className="p-10 border-4 border-dashed border-destructive/20 rounded-2xl bg-destructive/5 space-y-4">
               <div className="flex items-center gap-3 text-destructive">
-                <AlertTriangle className="h-6 w-6" />
-                <h4 className="font-black uppercase tracking-tighter text-xl italic">受骗告知书</h4>
+                <AlertTriangle className="h-8 w-8" />
+                <h4 className="font-black uppercase tracking-tighter text-2xl italic">IDC 风险告知书</h4>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed italic font-medium">
-                点击“确认下单”即表示您已充分理解：本业务的所有硬件规格仅供参考（指脑补）。
-                我们保留在发电机没油、村长心情不好、或老王改 WiFi 密码时随时中断服务的权利。
+              <p className="text-base text-muted-foreground leading-relaxed italic font-bold">
+                点击“确认下单”即表示您已充分理解：本业务的所有硬件规格均为虚构（指脑补）。
+                我们保留在发电机没油、村长心情不好、或邻居改 WiFi 密码时随时卷钱跑路的权利。
+                服务器一旦起火，概不退费。
               </p>
             </section>
           </div>
@@ -191,42 +203,42 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <Card className="border-4 border-primary shadow-2xl overflow-hidden rounded-2xl bg-white">
               <CardHeader className="bg-primary text-white p-6">
                 <div className="flex justify-between items-center">
-                  <CardTitle className="text-sm uppercase font-black tracking-widest">动态账单 (实打实扣)</CardTitle>
-                  <ShoppingCart className="h-4 w-4 opacity-50" />
+                  <CardTitle className="text-sm uppercase font-black tracking-widest italic">动态账单 (实打实扣)</CardTitle>
+                  <ShoppingCart className="h-5 w-5 opacity-50" />
                 </div>
               </CardHeader>
               <CardContent className="p-8 space-y-6">
                 <div className="space-y-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">基础月租</span>
-                    <span className="font-black">${product.price} / {product.unit}</span>
+                    <span className="text-muted-foreground font-bold">基础服务月租</span>
+                    <span className="font-black text-lg">${product.price} / {product.unit}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">硬件超开附加费</span>
-                    <span className="font-black text-destructive">$1,299.00</span>
+                    <span className="text-muted-foreground font-bold">超开附加费 (1000%)</span>
+                    <span className="font-black text-destructive text-lg">$2,580.00</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">技术员午餐费</span>
-                    <span className="font-black">$25.00</span>
+                    <span className="text-muted-foreground font-bold">老王 WiFi 维护费</span>
+                    <span className="font-black text-lg">$50.00</span>
                   </div>
-                  <div className="flex justify-between text-sm text-destructive font-bold">
-                    <span className="flex items-center gap-1">跑路保险 (强制) <AlertTriangle className="h-3 w-3" /></span>
-                    <span>$500.00</span>
+                  <div className="flex justify-between text-sm text-destructive font-black p-3 bg-destructive/10 rounded-lg">
+                    <span className="flex items-center gap-1">强制跑路保险 <AlertTriangle className="h-3 w-3" /></span>
+                    <span>$800.00</span>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-primary/20 space-y-4">
+                <div className="pt-8 border-t border-primary/20 space-y-4">
                   <div className="flex justify-between items-end">
-                    <span className="font-black text-lg">当前应付:</span>
+                    <span className="font-black text-xl italic uppercase">当前应付:</span>
                     <div className="text-right">
-                      <p className="text-4xl font-black text-primary italic leading-none">
-                        ${(parseFloat(product.price) + 1824).toFixed(2)}
+                      <p className="text-5xl font-black text-primary italic leading-none tracking-tighter">
+                        ${(parseFloat(product.price) + 3430).toFixed(2)}
                       </p>
-                      <p className="text-[10px] text-muted-foreground mt-1 uppercase font-bold tracking-widest">初次入坑费</p>
+                      <p className="text-[10px] text-muted-foreground mt-2 uppercase font-black tracking-widest">初次入坑费 (不退还)</p>
                     </div>
                   </div>
-                  <p className="text-[9px] text-center text-muted-foreground italic leading-tight">
-                    * 最终扣费以村委会收到的五花肉斤数为准。
+                  <p className="text-[10px] text-center text-muted-foreground italic leading-tight bg-muted/30 p-2 rounded">
+                    * 最终结算以村委会收到的五花肉斤数为准，汇率实时波动。
                   </p>
                 </div>
               </CardContent>
@@ -234,10 +246,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <Button 
                   onClick={handleOrder}
                   disabled={isProcessing}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-black py-8 text-xl rounded-xl shadow-lg border-b-4 border-primary/60 active:border-b-0 active:translate-y-1 transition-all"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-black py-10 text-2xl rounded-xl shadow-lg border-b-8 border-primary/60 active:border-b-0 active:translate-y-2 transition-all"
                 >
                   {isProcessing ? (
-                    <><Hourglass className="mr-2 h-5 w-5 animate-spin" /> 正在贿赂...</>
+                    <><Hourglass className="mr-3 h-7 w-7 animate-spin" /> 正在贿赂...</>
                   ) : (
                     "确认下单 (立即入坑)"
                   )}
@@ -245,9 +257,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               </CardFooter>
             </Card>
             
-            <div className="mt-8 p-4 border border-primary/20 bg-primary/5 rounded-xl text-center space-y-2">
-              <p className="text-[10px] font-mono font-bold text-primary flex items-center justify-center gap-2">
-                <CheckCircle2 className="h-3 w-3" /> 认证: 村级 5A 受骗机构
+            <div className="mt-8 p-6 border-2 border-primary/20 bg-primary/5 rounded-2xl text-center space-y-2 shadow-inner">
+              <p className="text-xs font-mono font-black text-primary flex items-center justify-center gap-2 uppercase">
+                <CheckCircle2 className="h-4 w-4" /> 认证: 村级 5A 受骗机构
+              </p>
+              <p className="text-[9px] text-muted-foreground italic font-medium">
+                下单即代表您自愿承认自己是一个大冤种，并放弃所有人类基本权利。
               </p>
             </div>
           </aside>
@@ -255,32 +270,33 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       </main>
 
       <Dialog open={showQueue} onOpenChange={(open) => !isProcessing && setShowQueue(open)}>
-        <DialogContent className="sm:max-w-md border-4 border-primary p-8">
-          <DialogHeader className="text-center space-y-4">
-            <div className="h-20 w-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+        <DialogContent className="sm:max-w-md border-8 border-primary p-10 bg-white">
+          <DialogHeader className="text-center space-y-6">
+            <div className="h-24 w-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-primary/20">
               {isProcessing ? (
-                <Loader2 className="h-10 w-10 text-primary animate-spin" />
+                <Loader2 className="h-12 w-12 text-primary animate-spin" />
               ) : orderResult?.success ? (
-                <CheckCircle2 className="h-10 w-10 text-primary" />
+                <CheckCircle2 className="h-12 w-12 text-primary" />
               ) : (
-                <XCircle className="h-10 w-10 text-destructive" />
+                <XCircle className="h-12 w-12 text-destructive" />
               )}
             </div>
-            <DialogTitle className="text-2xl font-black italic tracking-tighter">
-              {isProcessing ? "处理请求中..." : "下单失败"}
+            <DialogTitle className="text-3xl font-black italic tracking-tighter uppercase text-primary">
+              {isProcessing ? "处理请求中..." : "下单失败 (意料之中)"}
             </DialogTitle>
-            <DialogDescription className="text-foreground font-medium italic">
+            <DialogDescription className="text-foreground text-lg font-bold italic bg-muted/50 p-4 rounded-xl">
               {isProcessing ? currentEvent : orderResult?.message}
             </DialogDescription>
           </DialogHeader>
 
           {isProcessing && (
-            <div className="py-6 space-y-2">
-              <div className="flex justify-between text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">
-                <span>正在排队...</span>
+            <div className="py-8 space-y-4">
+              <div className="flex justify-between text-xs font-mono font-black uppercase tracking-widest text-primary">
+                <span>正在贿赂村长...</span>
                 <span>{Math.round(progress)}%</span>
               </div>
-              <Progress value={progress} className="h-3 bg-primary/10" />
+              <Progress value={progress} className="h-4 bg-primary/10 rounded-full" />
+              <p className="text-[10px] text-center text-muted-foreground italic">排队人数: 58,291,032 (全是机器人)</p>
             </div>
           )}
 
@@ -288,7 +304,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <DialogFooter className="sm:justify-center">
               <Button 
                 onClick={() => setShowQueue(false)}
-                className="bg-destructive hover:bg-destructive/80"
+                className="bg-destructive hover:bg-destructive/80 text-white font-black px-10 h-14 text-lg rounded-xl shadow-xl"
               >
                 我知道了，我是大冤种
               </Button>
