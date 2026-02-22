@@ -8,12 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Server, Database, HardDrive, LayoutGrid, 
   ChevronRight, ShoppingCart, Filter, Info, 
-  Cpu, Globe
+  Cpu, Globe, ShieldCheck, Layers, Boxes, Bird, Mail, Key
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-const CATEGORIES = ["全部", "计算", "存储", "网络", "数据库"];
+const CATEGORIES = ["全部", "计算", "存储", "网络", "数据库", "平台", "安全", "其他"];
 
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("全部");
@@ -28,6 +28,9 @@ export default function ProductsPage() {
       case '存储': return <HardDrive className="h-5 w-5" />;
       case '网络': return <Globe className="h-5 w-5" />;
       case '数据库': return <Database className="h-5 w-5" />;
+      case '平台': return <Layers className="h-5 w-5" />;
+      case '安全': return <ShieldCheck className="h-5 w-5" />;
+      case '其他': return <Boxes className="h-5 w-5" />;
       default: return <Server className="h-5 w-5" />;
     }
   };
