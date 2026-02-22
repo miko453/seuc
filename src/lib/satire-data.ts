@@ -44,15 +44,39 @@ export const PRODUCTS: ProductConfig[] = [
     ]
   },
   {
-    id: "vds",
-    title: "独享型服务器 (实为超卖)",
-    description: "宣称独享，实际上我们只是把 CPU 的名字改成了你的名字。心理安慰效果极佳。",
-    price: "99.00",
+    id: "nat",
+    title: "NAT 跳 NAT 穿透型 VPS",
+    description: "经过 18 层 NAT 转发。没人能找到你的服务器，包括你自己。",
+    price: "5.50",
     unit: "月",
     category: "计算",
-    features: ["名字独享", "物理位置玄学", "技术员亲手擦灰"],
+    features: ["隐身效果 100%", "延迟 5000ms+", "自带随机出口"],
     options: [
-      { label: "物理位置", items: ["地窖 A 区", "冰柜上层", "电视机后盖"], hint: "电视机后盖散热较好，但电视开着时会卡。" }
+      { label: "NAT 深度", items: ["8层 (入门)", "18层 (地狱)", "99层 (佛系)"], hint: "层数越多，数据包越容易在半路迷路。" }
+    ]
+  },
+  {
+    id: "elastic",
+    title: "弹性跳弹性 (薛定谔云)",
+    description: "资源只在你不观测它时存在。一旦打开 SSH 登录，内存就会自动坍缩成 1KB。",
+    price: "19.90",
+    unit: "月",
+    category: "计算",
+    features: ["资源动态坍缩", "按需消失", "玄学计费"],
+    options: [
+      { label: "观测模式", items: ["闭眼运行 (100%性能)", "睁眼运行 (5%性能)"], hint: "建议购买后立即遗忘该服务器，性能最强。" }
+    ]
+  },
+  {
+    id: "web-hosting",
+    title: "村口虚拟主机 (千人坑)",
+    description: "128MB 硬盘空间。与全乡 1500 个网站共享一个老王淘汰的 5400 转硬盘。",
+    price: "2.50",
+    unit: "年",
+    category: "计算",
+    features: ["全乡共进退", "物理震动散热", "不支持 PHP"],
+    options: [
+      { label: "共位邻居数", items: ["1000位", "3000位 (超值)", "一村一机 (精英)"], hint: "邻居越多，分摊的电费越少。" }
     ]
   },
   {
@@ -89,18 +113,6 @@ export const PRODUCTS: ProductConfig[] = [
     features: ["物理带宽", "丢包看老鹰", "生态环保"],
     options: [
       { label: "加速区域", items: ["村头", "全县", "隔壁镇"], hint: "跨镇加速需要两只信鸽中转，延迟翻倍。" }
-    ]
-  },
-  {
-    id: "vpn",
-    title: "安全 VPN (老王路由)",
-    description: "流量经过老王家洗衣机智能转发。全链路加密（指老王看不懂英文）。",
-    price: "15.00",
-    unit: "月",
-    category: "网络",
-    features: ["老王嗅探加密", "洗衣机式重传", "速度随缘"],
-    options: [
-      { label: "加密协议", items: ["方言混淆", "乱码协议", "假装没网"], hint: "假装没网协议会让你的流量看起来像是在重试。" }
     ]
   }
 ];
