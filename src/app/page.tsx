@@ -5,7 +5,7 @@ import { HeroAnnouncement } from "@/components/HeroAnnouncement";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
-  Zap, Boxes, Network, Layers, Globe, Cpu, Database, Activity, HardDrive, ShieldCheck, ChevronRight, Terminal
+  Zap, Boxes, Network, Globe, Cpu, Database, Activity, HardDrive, ShieldCheck, ChevronRight, Terminal
 } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +23,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 relative z-10">
           <HeroAnnouncement />
           <div className="max-w-3xl">
-            <h1 className="text-6xl font-headline font-black mb-6 leading-[1.1] tracking-tighter">
+            <h1 className="text-6xl font-headline font-black mb-6 leading-[1.1] tracking-tighter text-white">
               专业的 <span className="text-primary italic">超开</span> 云计算<br />
               <span className="text-accent underline decoration-primary decoration-4">赋能每一份被绿的信任</span>
             </h1>

@@ -7,7 +7,7 @@ import { GlitchOverlay } from "@/components/GlitchOverlay";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { AlertTriangle, Server, Wifi, Database, Activity, Coffee, Skull } from "lucide-react";
+import { AlertTriangle, Server, Database, Activity, Skull } from "lucide-react";
 
 type ServerMetric = {
   id: string;

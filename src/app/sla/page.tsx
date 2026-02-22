@@ -1,3 +1,4 @@
+
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertCircle, Gavel, ShieldOff, Clock } from "lucide-react";
