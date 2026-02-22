@@ -3,7 +3,7 @@
 import { 
   Zap, ShieldCheck, Activity, Globe, 
   Cpu, HardDrive, ShoppingCart, ArrowRight,
-  Bird, Wifi, Database, Search, Terminal,
+  Bird, Wifi, Database, Terminal,
   CloudOff, Server, LayoutGrid, Building2, CheckCircle2,
   Network, Layers, ShieldAlert
 } from "lucide-react";
@@ -134,7 +134,7 @@ export default function Home() {
               price: "2.50", 
               desc: "极致共享 IP，端口随机漂移。您的出口 IP 位置可能在村长办公室。",
               tags: ["地狱级延迟", "IP 漂移", "高可用(指拔线)"],
-              href: "/products/nat-vps-套娃"
+              href: "/products/vps-elastic"
             },
             { 
               title: "咸菜缸冷存储 (OSS)", 

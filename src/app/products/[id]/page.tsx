@@ -1,4 +1,3 @@
-
 "use client";
 
 import { use, useEffect, useState } from "react";
@@ -86,7 +85,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     if (l.includes('cpu') || l.includes('计算')) return <Cpu className="h-4 w-4 text-primary" />;
     if (l.includes('内存') || l.includes('ram')) return <Zap className="h-4 w-4 text-primary" />;
     if (l.includes('盘') || l.includes('空间') || l.includes('存储')) return <HardDrive className="h-4 w-4 text-primary" />;
-    if (l.includes('网') || l.includes('带') || l.includes('ip')) return <Globe className="h-4 w-4 text-primary" />;
+    if (l.includes('网') || l.includes('带') || l.includes('ip') || l.includes('流量')) return <Network className="h-4 w-4 text-primary" />;
     if (l.includes('系统') || l.includes('环境') || l.includes('版本')) return <Layers className="h-4 w-4 text-primary" />;
     return <Boxes className="h-4 w-4 text-primary" />;
   };
@@ -256,15 +255,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </Button>
               </CardFooter>
             </Card>
-            
-            <div className="mt-8 p-6 border-2 border-primary/20 bg-primary/5 rounded-2xl text-center space-y-2 shadow-inner">
-              <p className="text-xs font-mono font-black text-primary flex items-center justify-center gap-2 uppercase">
-                <CheckCircle2 className="h-4 w-4" /> 认证: 村级 5A 受骗机构
-              </p>
-              <p className="text-[9px] text-muted-foreground italic font-medium">
-                下单即代表您自愿承认自己是一个大冤种，并放弃所有人类基本权利。
-              </p>
-            </div>
           </aside>
         </div>
       </main>
