@@ -3,7 +3,7 @@
 import { 
   Zap, ArrowRight,
   Wifi, Database, Terminal,
-  CloudOff, Network, Cpu, HardDrive, ShoppingCart, Globe
+  CloudOff, Network, Cpu, HardDrive, ShoppingCart, Globe, Signal, Activity, ShieldCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -128,18 +128,18 @@ export default function Home() {
             { 
               title: "NAT VPS (18层套娃)", 
               icon: Network, 
-              price: "2.50", 
+              price: "5.00", 
               desc: "共享 IP 极致转发。您的出口可能在村长办公室。",
               tags: ["地狱延迟", "IP 漂移"],
               href: "/products/vps-elastic"
             },
             { 
-              title: "咸菜缸存储 (OSS)", 
-              icon: HardDrive, 
-              price: "0.01", 
-              desc: "绝对物理隔绝。数据入缸，安全直通地心。",
-              tags: ["咸菜风味", "物理隔离"],
-              href: "/products/storage-jar"
+              title: "VDS (独占死机版)", 
+              icon: Activity, 
+              price: "45.00", 
+              desc: "KVM 架构独占村长电脑核。不会被邻居抢带宽。",
+              tags: ["独占资源", "物理隔离"],
+              href: "/products/vds-dedicated"
             }
           ].map((product, i) => (
             <Card key={i} className="group hover:border-primary transition-all duration-500 overflow-hidden shadow-xl hover:shadow-primary/10 rounded-3xl border-2">
