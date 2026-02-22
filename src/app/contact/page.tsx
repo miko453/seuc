@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -30,8 +29,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-      
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <header className="mb-16 text-center">
           <h1 className="text-5xl font-headline font-bold mb-4 tracking-tighter">

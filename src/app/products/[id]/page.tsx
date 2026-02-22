@@ -1,8 +1,6 @@
-
 "use client";
 
 import { use } from "react";
-import { Navigation } from "@/components/Navigation";
 import { PRODUCTS } from "@/lib/satire-data";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
@@ -44,8 +42,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-      
       <main className="max-w-5xl mx-auto px-4 py-16">
         <Link href="/" className="inline-flex items-center text-sm text-primary hover:underline mb-8">
           <ChevronLeft className="h-4 w-4 mr-1" /> 返回全线业务
