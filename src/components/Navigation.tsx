@@ -2,61 +2,82 @@
 
 import Link from "next/link";
 import { 
-  Menu, Search, Bell, HelpCircle, 
-  Settings, User, ChevronDown, 
-  LayoutGrid, CloudOff, Terminal
+  CloudOff, Menu, X, ShoppingCart, 
+  ShieldCheck, Activity, HelpCircle 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+const NAV_LINKS = [
+  { label: "选购业务", href: "/products", icon: ShoppingCart },
+  { label: "节点探针", href: "/nodes", icon: Activity },
+  { label: "合规备案", href: "/beian", icon: ShieldCheck },
+  { label: "帮助中心", href: "/contact", icon: HelpCircle },
+];
 
 export function Navigation() {
-  const [project, setProject] = useState("大槐树村-prod-01");
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="gcp-header">
-      <div className="flex items-center gap-4 shrink-0">
-        <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-muted">
-          <Menu className="h-5 w-5" />
-        </Button>
-        <Link href="/" className="flex items-center gap-2 group">
-          <CloudOff className="h-6 w-6 text-primary group-hover:animate-console-glitch" />
-          <span className="font-semibold text-[18px] text-[#5f6368] hidden md:block">
-            村口云 <span className="font-light text-muted-foreground">控制台</span>
-          </span>
-        </Link>
-      </div>
-
-      <div className="flex items-center gap-2 ml-8 px-3 py-1 bg-muted/50 rounded hover:bg-muted cursor-pointer transition-colors border border-transparent hover:border-border">
-        <span className="text-xs font-medium text-primary uppercase tracking-tighter">项目</span>
-        <span className="text-sm font-medium">{project}</span>
-        <ChevronDown className="h-4 w-4 text-muted-foreground" />
-      </div>
-
-      <div className="flex-1 max-w-2xl mx-12 hidden md:block">
-        <div className="relative group">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-muted-foreground group-focus-within:text-primary" />
+    <nav className="bg-white border-b border-primary/10 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-2 group">
+              <CloudOff className="h-8 w-8 text-primary group-hover:animate-glitch" />
+              <div className="flex flex-col -space-y-1">
+                <span className="font-black text-xl italic tracking-tighter">村口云</span>
+                <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-widest">Cunkou Cloud</span>
+              </div>
+            </Link>
           </div>
-          <Input 
-            className="h-9 w-full bg-[#f1f3f4] border-none focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary/20 pl-10 transition-all placeholder:text-muted-foreground/60 text-sm"
-            placeholder="搜索资源、文档和走丢的家禽..."
-          />
+
+          <div className="hidden md:flex items-center space-x-8">
+            {NAV_LINKS.map((link) => (
+              <Link 
+                key={link.href} 
+                href={link.href}
+                className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+              >
+                <link.icon className="h-4 w-4" />
+                {link.label}
+              </Link>
+            ))}
+            <div className="h-4 w-px bg-border" />
+            <Button variant="ghost" className="text-sm font-bold" asChild>
+              <Link href="/login">登录受骗</Link>
+            </Button>
+            <Button className="bg-primary hover:bg-primary/90 text-white font-bold" asChild>
+              <Link href="/register">立即入坑</Link>
+            </Button>
+          </div>
+
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-muted-foreground p-2">
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-1 ml-auto shrink-0">
-        <Button variant="ghost" size="icon" className="text-muted-foreground">
-          <Terminal className="h-4 w-4" />
-        </Button>
-        <Button variant="ghost" size="icon" className="text-muted-foreground">
-          <HelpCircle className="h-4 w-4" />
-        </Button>
-        <Button variant="ghost" size="icon" className="text-muted-foreground">
-          <Bell className="h-4 w-4" />
-        </Button>
-        <div className="h-8 w-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center ml-2 cursor-pointer hover:bg-primary/20 transition-colors">
-          <User className="h-4 w-4 text-primary" />
+      {/* Mobile menu */}
+      <div className={cn("md:hidden bg-white border-b transition-all", isOpen ? "block" : "hidden")}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block px-3 py-2 text-base font-medium text-muted-foreground hover:text-primary"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div className="grid grid-cols-2 gap-2 p-2">
+            <Button variant="outline" asChild><Link href="/login">登录</Link></Button>
+            <Button asChild><Link href="/register">注册</Link></Button>
+          </div>
         </div>
       </div>
     </nav>

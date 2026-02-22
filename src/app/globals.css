@@ -10,20 +10,20 @@
     --card-foreground: 210 11% 15%;
     --popover: 0 0% 100%;
     --popover-foreground: 210 11% 15%;
-    --primary: 217 89% 61%; /* GCP Blue */
+    --primary: 142 71% 45%; /* 村口绿 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 20% 98%;
-    --secondary-foreground: 210 11% 15%;
+    --secondary: 142 71% 97%;
+    --secondary-foreground: 142 71% 25%;
     --muted: 210 20% 96%;
     --muted-foreground: 210 11% 40%;
-    --accent: 217 89% 61%;
+    --accent: 142 71% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     --border: 210 20% 90%;
     --input: 210 20% 90%;
-    --ring: 217 89% 61%;
-    --radius: 0.5rem;
+    --ring: 142 71% 45%;
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -31,7 +31,7 @@
     --foreground: 0 0% 98%;
     --card: 210 11% 18%;
     --card-foreground: 0 0% 98%;
-    --primary: 217 89% 61%;
+    --primary: 142 71% 45%;
     --border: 210 11% 25%;
   }
 }
@@ -41,30 +41,33 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#f8f9fa] text-foreground font-body;
+    @apply bg-[#f8f9fa] text-foreground font-body leading-normal;
   }
 }
 
-/* 模拟控制台的阴影和悬浮效果 */
-.console-card {
-  @apply bg-white border border-border shadow-sm rounded-lg overflow-hidden;
+/* 模拟大厂官网的阴影 */
+.idc-card {
+  @apply bg-white border border-border/10 shadow-sm rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/20;
 }
 
-.gcp-header {
-  @apply bg-white border-b border-border h-14 flex items-center px-4 sticky top-0 z-[100];
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(-2px, -1px); }
+  60% { transform: translate(2px, 1px); }
+  80% { transform: translate(2px, -1px); }
+  100% { transform: translate(0); }
 }
 
-.gcp-sidebar {
-  @apply bg-white border-r border-border w-64 fixed left-0 top-14 bottom-0 overflow-y-auto hidden lg:block;
+.animate-glitch {
+  animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) infinite;
 }
 
-/* 闪烁的故障效果 */
-@keyframes console-glitch {
-  0% { opacity: 1; }
-  50% { opacity: 0.8; transform: translateX(1px); }
-  100% { opacity: 1; }
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.4; }
 }
 
-.animate-console-glitch {
-  animation: console-glitch 2s infinite;
+.animate-flicker {
+  animation: flicker 3s linear infinite;
 }
