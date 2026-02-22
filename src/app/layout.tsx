@@ -1,10 +1,9 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Uncertain Cloud | High Performance, Low Reliability',
-  description: 'The world\'s first cloud provider located in actual village basements. RAM overselling is our passion.',
+  title: '不可靠云 | 高性能，极低可靠性',
+  description: '全球首家位于乡村地下室的云服务商。超卖内存是我们的热情所在。',
 };
 
 export default function RootLayout({
@@ -13,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="zh" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
