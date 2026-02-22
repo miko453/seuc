@@ -66,7 +66,7 @@ export default function Home() {
                   </div>
                   <h2 className="text-2xl font-bold">核心受骗业务</h2>
                 </div>
-                <Link href="/products" className="text-sm text-primary hover:underline flex items-center gap-1">
+                <Link href="/dashboard" className="text-sm text-primary hover:underline flex items-center gap-1">
                   查看全部 (99+) <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -125,7 +125,9 @@ export default function Home() {
                 <p className="text-muted-foreground">
                   当老王拔掉网线的那一刻，我们的信鸽系统会自动接管您的 1KB 流量，并为您在大厅循环播放《绿光》。
                 </p>
-                <Button className="bg-accent text-black font-bold">立即开启 (强行订阅)</Button>
+                <Button className="bg-accent text-black font-bold" asChild>
+                  <Link href="/dashboard">立即开启 (强行订阅)</Link>
+                </Button>
               </div>
               <div className="h-48 w-48 bg-primary/20 rounded-full flex items-center justify-center animate-pulse">
                 <Activity className="h-24 w-24 text-primary" />
@@ -172,6 +174,9 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              <Button variant="ghost" className="w-full mt-4 h-8 text-[10px] font-mono text-primary/60" asChild>
+                <Link href="/nodes">查看实时节点探针 <ChevronRight className="h-3 w-3" /></Link>
+              </Button>
             </Card>
 
             <div className="p-6 bg-primary/5 border border-dashed border-primary/30 rounded-lg text-center relative group">
@@ -190,7 +195,7 @@ export default function Home() {
           <div className="space-y-4">
             <h5 className="text-sm font-bold">关于我们</h5>
             <ul className="space-y-2 text-xs text-muted-foreground font-light">
-              <li>村口故事</li>
+              <li><Link href="/contact" className="hover:text-primary">村口故事</Link></li>
               <li>老王的秘密</li>
               <li>地窖探险</li>
               <li>加入我们 (当信鸽)</li>
@@ -199,8 +204,8 @@ export default function Home() {
           <div className="space-y-4">
             <h5 className="text-sm font-bold">法律条款</h5>
             <ul className="space-y-2 text-xs text-muted-foreground font-light">
-              <li>免责(跑路)声明</li>
-              <li>客户(大冤种)权益</li>
+              <li><Link href="/sla" className="hover:text-primary">免责(跑路)声明</Link></li>
+              <li><Link href="/tos" className="hover:text-primary">服务(谁看啊)条款</Link></li>
               <li>数据(公共)隐私</li>
               <li>举报(无门)入口</li>
             </ul>
