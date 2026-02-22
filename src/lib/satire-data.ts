@@ -27,202 +27,149 @@ export type ProductConfig = {
 };
 
 export const PRODUCTS: ProductConfig[] = [
-  // 计算类
   {
-    id: "vps-gen",
-    title: "虚拟专用服务器 (发电机版)",
-    description: "高性能（指噪音大）虚拟机实例。支持 1:1000 严重超卖，配备物理散热（指扇扇子）。",
+    id: "vps-ultra",
+    title: "虚拟专用服务器 (超开 1:1000)",
+    description: "极致性能。我们通过修改内核参数，让您的 1 核 CPU 看起来像 1024 核，虽然跑起来像个计算器。",
     price: "0.15",
     unit: "小时",
     category: "计算",
     features: ["手摇发电冗余", "邻居 WiFi 接入", "随机内核崩溃"],
     options: [
-      { label: "机器类型", items: ["n1-ultra-small (0.0125核)", "n2-imaginary (虚拟核)", "e2-overbooked (千人共用)"], hint: "选择虚拟核时，性能由您的信仰决定。" }
+      { label: "机器类型", items: ["n1-ultra-small (0.001核)", "n2-imaginary (纯虚拟)", "e2-overbooked (共享发电机)"], hint: "选择虚拟核时，性能由您的信仰决定。" },
+      { label: "操作系统", items: ["CentOS 6 (传家宝)", "WinXP 纯净版", "红星系统 (高安全)"], hint: "安装 WinXP 需额外支付老王的授权费。" }
     ]
   },
-  {
-    id: "light-app",
-    title: "轻量应用服务器 (纸飞机版)",
-    description: "开箱即用，适合小型（指只有 1 个人访问）博客或测试。采用纸质化存储架构。",
-    price: "9.9",
-    unit: "月",
-    category: "计算",
-    features: ["一键跑路脚本", "自动宕机保护", "流量随缘计算"],
-    options: [
-      { label: "套餐选择", items: ["起步版 (仅工作时间在线)", "进阶版 (支持 5 个并发)", "土豪版 (村长亲自盯着运行)"], hint: "进阶版支持 5 个并发，第 6 个人访问时服务器会起火。" }
-    ]
-  },
-  {
-    id: "nat-vps",
-    title: "NAT 服务器 (共享 IP 版)",
-    description: "通过老王家的路由器进行端口转发。支持 1 个共享 IPv4，端口数由老王心情决定。",
-    price: "1.50",
-    unit: "月",
-    category: "计算",
-    features: ["内网穿透(物理版)", "IP 随时失联", "无独立公网 IP"],
-    options: [
-      { label: "转发协议", items: ["TCP (偶尔通)", "UDP (基本不通)", "ICMP (想都别想)"], hint: "TCP 协议在老王打游戏时会变得极其不稳定。" }
-    ]
-  },
-  {
-    id: "rdp-server",
-    title: "远程桌面服务器 (全自动挂机)",
-    description: "预装 Windows XP 极速版。适合挂载 QQ 宠物、偷菜脚本等高价值业务。",
-    price: "25.00",
-    unit: "月",
-    category: "计算",
-    features: ["支持虚拟显卡", "24h 人工值守(指睡觉)", "显存超开 1000%"],
-    options: [
-      { label: "OS 版本", items: ["XP 纯净版", "Win7 深度版", "Win95 怀旧版"], hint: "Win95 版本附赠‘扫雷’高可用集群。" }
-    ]
-  },
-  {
-    id: "dedicated-server",
-    title: "独立服务器 (独栋发电机)",
-    description: "专机专用。我们为您在地窖里预留了一个咸菜坛子，专门安放这台机器。",
-    price: "888.00",
-    unit: "月",
-    category: "计算",
-    features: ["独立 220V 插座", "物理防火墙(大黄狗)", "技术员小王专属服务"],
-    options: [
-      { label: "硬件级别", items: ["洋垃圾单路", "洋垃圾双路", "报废工作站"], hint: "报废工作站具有极高的收藏价值。" }
-    ]
-  },
-  // 存储类
-  {
-    id: "oss-manual",
-    title: "对象存储 (大妈手工记账)",
-    description: "海量非结构化数据存储。每一位数据都由村口李大妈用笔记本记录。",
-    price: "0.01",
-    unit: "GB",
-    category: "存储",
-    features: ["防潮袋物理存储", "人工 MD5 校验", "读取需排队(等大妈看完电视剧)"],
-    options: [
-      { label: "冗余级别", items: ["单点大妈", "多点大妈 (广场舞同步)", "跨村冗余"], hint: "跨村冗余需要我们通过信鸽将笔记本寄往邻村。" }
-    ]
-  },
-  {
-    id: "big-disk",
-    title: "大硬盘服务器 (咸菜缸阵列)",
-    description: "适合海量（指 500GB）数据备份。基于最新的 JBOD (Just a Bunch of Old Disks) 架构。",
-    price: "50.00",
-    unit: "月",
-    category: "存储",
-    features: ["多余螺丝钉固定", "随机噪音降噪", "读取延迟以分钟计"],
-    options: [
-      { label: "阵列类型", items: ["RAID 0 (极致自杀)", "RAID 1 (老王也有一份)", "RAID 5 (数学难题)"], hint: "RAID 5 由于计算量太大，会导致 CPU 冒烟。" }
-    ]
-  },
-  // 网络类
   {
     id: "cdn-pigeon",
     title: "内容分发网络 (信鸽 Carrier)",
-    description: "全球首家物理分发网络。通过信鸽将硬盘运送到用户家门口。",
+    description: "全球首家物理分发。通过信鸽携带硬盘实现物理级缓存同步，丢包率取决于老鹰的出没频率。",
     price: "5.00",
     unit: "TB",
     category: "网络",
-    features: ["零网络开销", "物理防劫持(指信鸽会躲老鹰)", "按羽计费"],
+    features: ["零延迟(指心理上)", "物理防劫持", "按羽计费"],
     options: [
-      { label: "信鸽等级", items: ["肉鸽 (入门级)", "赛鸽 (企业级)", "特工鸽 (机密级)"], hint: "赛鸽速度最快，但容易在半路去相亲。" }
+      { label: "信鸽等级", items: ["肉鸽 (入门)", "赛鸽 (企业)", "特工鸽 (机密)"], hint: "特工鸽会躲避村头的弹弓攻击。" },
+      { label: "投递策略", items: ["降落伞投放", "窗台降落", "交给李大妈"], hint: "交给李大妈可能会被她拆开检查数据是否健康。" }
     ]
   },
   {
-    id: "dns-village",
-    title: "智能 DNS 托管 (村口指路)",
-    description: "根据用户位置（指在哪个地里）自动解析。解析时间取决于广播大喇叭的嗓门。",
-    price: "0.99",
-    unit: "域",
-    category: "网络",
-    features: ["多线路解析(老王线/村长线)", "TTL 永久生效", "缓存手动清理"],
+    id: "oss-manual",
+    title: "对象存储 (大妈手工记账)",
+    description: "海量数据持久化。每一位 0 和 1 都由村口李大妈用笔记本手工记录，数据永久保存直到笔记本丢了。",
+    price: "0.01",
+    unit: "GB",
+    category: "存储",
+    features: ["人工校验和", "防潮袋备份", "读取需等广告结束"],
     options: [
-      { label: "解析速度", items: ["快如狗 (30秒)", "稳如牛 (3小时)", "随缘 (下周见)"], hint: "‘随缘’模式下，我们会等村委会开会决定解析结果。" }
+      { label: "备份介质", items: ["新华字典背面", "咸菜坛子刻字", "小王脑补"], hint: "咸菜坛子刻字具备天然的防水特性。" },
+      { label: "读取速度", items: ["大妈清醒时", "电视剧广告期间", "等大妈睡醒"], hint: "大妈睡醒后读取速度可达 1 bit 每小时。" }
     ]
   },
   {
-    id: "ipv6-only",
-    title: "IPv6-Only 服务器 (仅有 6 个 IP)",
-    description: "超前部署。我们为您分配了 6 个 IPv6 地址，其中 5 个是技术员脑补的。",
-    price: "0.50",
+    id: "nat-jump",
+    title: "NAT 跳 NAT (无限转发)",
+    description: "经过老王家、小李家、村长家共 18 层路由转发。完美隐藏真实 IP，连你自己都找不到服务器在哪里。",
+    price: "1.50",
     unit: "月",
-    category: "网络",
-    features: ["无法连接 IPv4", "原生协议支持", "极其难记的 IP 地址"],
+    category: "计算",
+    features: ["内网穿透(物理版)", "18层转发", "无独立公网 IP"],
     options: [
-      { label: "IP 数量", items: ["6个 (足额)", "1个 (极简)", "0个 (最安全)"], hint: "0 个 IP 地址可以有效预防所有黑客攻击。" }
+      { label: "转发层数", items: ["3层 (普通)", "9层 (地狱)", "18层 (虚无)"], hint: "18层转发后，延迟大概在 3 到 5 个世纪。" }
     ]
   },
-  // 数据库类
   {
-    id: "mysql-sweet-potato",
+    id: "rds-potato",
     title: "MySQL 托管 (红薯数据库)",
-    description: "基于红薯存储介质。支持 SQL 查询（通过纸条传递）。",
+    description: "基于地窖红薯存储引擎。数据像红薯一样深埋地底，具备天然的防核弹打击能力。",
     price: "12.00",
     unit: "库",
     category: "数据库",
-    features: ["防爆备份(深埋)", "慢查询人工处理", "支持红薯 SQL 语法"],
+    features: ["防爆备份", "红薯 SQL 语法", "慢查询人工干预"],
     options: [
-      { label: "存储引擎", items: ["InnoDB (地窖内)", "MyISAM (我的红薯)", "Memory (即吃即焚)"], hint: "Memory 引擎在村长饿了的时候会丢失所有数据。" }
+      { label: "存储引擎", items: ["InnoDB (地窖)", "Memory (即吃即焚)", "MaoNiao (猫尿驱动)"], hint: "猫尿驱动引擎在湿度大时性能会有质的飞跃。" }
     ]
   },
-  // 平台与高级类
-  {
-    id: "paas-platform",
-    title: "PaaS (村长跑路平台)",
-    description: "一站式应用构建。我们为您准备了所有的跑路工具，无需关心底层发电机。",
-    price: "99.00",
-    unit: "APP",
-    category: "平台",
-    features: ["自动缩容至 0", "环境即焚", "代码泄露保护"],
-    options: [
-      { label: "运行环境", items: ["PHP 4.0", "Python 2.3", "Node.js 0.1"], hint: "我们只提供最稳定的老旧版本，防止您引入过新的 Bug。" }
-    ]
-  },
-  {
-    id: "saas-leek",
-    title: "SaaS (自动收韭菜系统)",
-    description: "企业级管理软件。包含‘员工心理控制’、‘工资条自动消失’等核心模块。",
-    price: "199.00",
-    unit: "月",
-    category: "平台",
-    features: ["全自动压榨", "KPI 脑补生成", "老板跑路提醒"],
-    options: [
-      { label: "管理深度", items: ["浅层洗脑", "中层打鸡血", "深层 PUA"], hint: "‘深层 PUA’模式会向员工发送‘这是对你的锻炼’等自动消息。" }
-    ]
-  },
-  {
-    id: "iaas-gen",
-    title: "IaaS (基础设施即发电机)",
-    description: "最底层的资源交付。直接交付一台发电机和一桶柴油到您的机柜。",
-    price: "1500.00",
-    unit: "月",
-    category: "平台",
-    features: ["物理层交互", "柴油自理", "手动点火服务"],
-    options: [
-      { label: "发电机型号", items: ["常柴单缸 (经典)", "潍柴多缸 (豪华)", "人力手摇 (环保)"], hint: "人力手摇模式需要您自带两名壮丁。" }
-    ]
-  },
-  // 安全类
   {
     id: "anti-complaint",
     title: "抗投诉服务器 (地窖屏蔽版)",
-    description: "完美防御所有投诉。地窖深达 50 米，且由大黄狗严密看守，邮递员都进不去。",
+    description: "50 米深地窖。屏蔽一切律师函、传票和催缴单。只有大黄狗能找到这里。",
     price: "300.00",
     unit: "月",
     category: "安全",
-    features: ["物理层无视投诉", "IP 随时跳转", "数据销毁保险"],
+    features: ["物理层无视投诉", "IP 随时跳转", "大黄狗巡逻"],
     options: [
-      { label: "屏蔽等级", items: ["屏蔽律师函", "屏蔽法院传票", "屏蔽全球通缉"], hint: "最高等级会断开所有网线，确保绝对安全。" }
+      { label: "防御等级", items: ["屏蔽李大妈", "屏蔽村委会", "屏蔽联合国"], hint: "屏蔽联合国模式下，我们会剪断所有外接网线。" }
     ]
   },
   {
     id: "ssl-stamp",
     title: "SSL 证书 (村长亲自盖章)",
-    description: "全绿加密图标。由村委会 CA (Cun-Committee Authority) 签发。",
+    description: "CA (Cun-Committee Authority) 签发。全绿加密图标，显示‘村长已阅’。",
     price: "5.00",
     unit: "年",
     category: "安全",
-    features: ["村长手印防伪", "地窖加密协议", "浏览器提示不安全(正常现象)"],
+    features: ["手工印章", "地窖加密", "浏览器红色警告(正常)"],
     options: [
-      { label: "证书等级", items: ["DV (大王认证)", "OV (二王认证)", "EV (村委会集体认证)"], hint: "EV 证书会在您的网站底部显示村长的电子签名。" }
+      { label: "验证级别", items: ["DV (大王认证)", "OV (二王认证)", "EV (村长盖章)"], hint: "EV 级别需要您向村委会捐赠两斤猪肉。" }
+    ]
+  },
+  {
+    id: "saas-leek",
+    title: "SaaS (自动收韭菜系统)",
+    description: "企业级管理。内置‘员工心理预警’、‘工资延迟发放’、‘自动加班通知’等模块。",
+    price: "199.00",
+    unit: "月",
+    category: "平台",
+    features: ["全自动压榨", "KPI 脑补生成", "跑路预演"],
+    options: [
+      { label: "压榨模式", items: ["996基础版", "007进阶版", "直到入土豪华版"], hint: "豪华版会自动监控员工的心跳以确保最大产出。" }
+    ]
+  },
+  {
+    id: "iaas-gen",
+    title: "IaaS (基础设施即发电机)",
+    description: "最底层资源交付。直接交付一台常柴 195 单缸机和一桶过期柴油到您的工位。",
+    price: "1500.00",
+    unit: "月",
+    category: "平台",
+    features: ["物理层交互", "手动点火", "黑烟排放许可"],
+    options: [
+      { label: "发电机型号", items: ["常柴单缸 (震动大)", "人力手摇 (低碳)", "土法炼焦驱动"], hint: "人力手摇需自行聘请两名壮丁。" }
+    ]
+  },
+  {
+    id: "email-spam",
+    title: "邮件托管 (垃圾箱直达版)",
+    description: "专业发信。我们保证您的每一封邮件都会精准进入用户的垃圾箱，绝不漏掉任何一个被举报的机会。",
+    price: "0.50",
+    unit: "万封",
+    category: "其他",
+    features: ["SPF/DKIM/老王认证", "无限黑名单", "自动退信保护"],
+    options: [
+      { label: "投递服务器", items: ["村口大喇叭", "信鸽群发", "老王转发器"], hint: "村口大喇叭适合进行公开的社会性抹黑。" }
     ]
   }
+];
+
+export const QUEUE_EVENTS = [
+  "正在贿赂村口大黄狗...",
+  "技术员小王正在手摇点火发电机...",
+  "正在通过信鸽协议同步您的支付信息...",
+  "邻居老王正在重启 WiFi 路由器，请稍等...",
+  "村长正在核实您的家庭背景...",
+  "地窖机房正在排水（昨天下雨了）...",
+  "正在将您的订单写入李大妈的笔记本...",
+  "正在由于网速过慢导致订单在半路迷路了...",
+  "正在尝试联系猫找回被删掉的数据库...",
+  "正在因为技术员去吃午饭，您的请求被挂起..."
+];
+
+export const ORDER_FAIL_REASONS = [
+  "余额不足：不仅是您的，我们的银行卡也被冻结了。",
+  "发电机起火：由于您下单过快，地窖里的发电机负载过高冒烟了。",
+  "老王改了密码：订单在传输过程中因无法连接 WiFi 丢失。",
+  "信鸽罢工：由于今天没有喂谷子，信鸽拒绝传输您的订单。",
+  "村长不同意：村长认为您长得不像大冤种，拒绝为您服务。",
+  "数据坍缩：由于地窖太潮湿，您的订单纸条已经糊掉了。"
 ];
