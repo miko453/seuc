@@ -5,25 +5,25 @@
 
 @layer base {
   :root {
-    --background: 257 14% 14%;
+    --background: 140 30% 6%;
     --foreground: 0 0% 98%;
-    --card: 257 14% 16%;
+    --card: 140 30% 8%;
     --card-foreground: 0 0% 98%;
-    --popover: 257 14% 14%;
+    --popover: 140 30% 6%;
     --popover-foreground: 0 0% 98%;
-    --primary: 264 55% 55%;
+    --primary: 142 76% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 257 10% 25%;
+    --secondary: 140 20% 15%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 257 10% 20%;
-    --muted-foreground: 257 5% 70%;
-    --accent: 297 78% 67%;
-    --accent-foreground: 0 0% 100%;
+    --muted: 140 20% 12%;
+    --muted-foreground: 142 10% 70%;
+    --accent: 84 81% 44%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 257 14% 25%;
-    --input: 257 14% 20%;
-    --ring: 264 55% 55%;
+    --border: 140 20% 15%;
+    --input: 140 20% 12%;
+    --ring: 142 76% 36%;
     --radius: 0.25rem;
   }
 }
@@ -58,14 +58,14 @@
 
 .glitch-effect::before {
   left: 2px;
-  text-shadow: -2px 0 #E76BED;
+  text-shadow: -2px 0 #22c55e;
   clip: rect(44px, 450px, 56px, 0);
   animation: glitch-anim 5s infinite linear alternate-reverse;
 }
 
 .glitch-effect::after {
   left: -2px;
-  text-shadow: -2px 0 #804DCC;
+  text-shadow: -2px 0 #84cc16;
   clip: rect(44px, 450px, 56px, 0);
   animation: glitch-anim2 5s infinite linear alternate-reverse;
 }

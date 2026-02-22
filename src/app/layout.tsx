@@ -1,9 +1,10 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '不可靠云 | 高性能，极低可靠性',
-  description: '全球首家位于乡村地下室的云服务商。超卖内存是我们的热情所在。',
+  title: '村口云 (Cunkou Cloud) | 专业超开，极致“绿”动',
+  description: '全球首家位于村长家地窖的云服务商。内存超开 1000%，网络全靠隔壁 WiFi。',
 };
 
 export default function RootLayout({

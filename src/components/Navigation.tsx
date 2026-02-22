@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -16,26 +17,26 @@ export function Navigation() {
             <Link href="/" className="flex items-center gap-2 group">
               <CloudOff className="h-8 w-8 text-primary group-hover:animate-glitch" />
               <span className="font-headline font-bold text-xl tracking-tighter">
-                不可靠 <span className="text-accent">云</span>
+                村口 <span className="text-accent">云</span>
               </span>
             </Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/dashboard" className="flex items-center gap-1.5 text-sm font-medium hover:text-accent transition-colors">
-              <Activity className="h-4 w-4" /> 运行状态
+              <Activity className="h-4 w-4" /> 监控(演的)
             </Link>
             <Link href="/config" className="flex items-center gap-1.5 text-sm font-medium hover:text-accent transition-colors">
-              <Settings className="h-4 w-4" /> 算力配置
+              <Settings className="h-4 w-4" /> 离谱配置
             </Link>
             <Link href="/sla" className="flex items-center gap-1.5 text-sm font-medium hover:text-accent transition-colors">
-              <FileText className="h-4 w-4" /> 免责协议
+              <FileText className="h-4 w-4" /> 跑路协议
             </Link>
             <Link href="/contact" className="flex items-center gap-1.5 text-sm font-medium hover:text-accent transition-colors">
               <MessageSquare className="h-4 w-4" /> 联系虚无
             </Link>
             <Button variant="default" className="bg-primary hover:bg-primary/80 text-white font-bold uppercase tracking-widest text-xs">
-              登录 (已损坏)
+              登录 (没做)
             </Button>
           </div>
 
@@ -49,7 +50,7 @@ export function Navigation() {
 
       {isOpen && (
         <div className="md:hidden bg-card border-b border-primary/20 px-4 pt-2 pb-6 space-y-2">
-          <Link href="/dashboard" className="block py-2 text-lg font-medium">运行状态</Link>
+          <Link href="/dashboard" className="block py-2 text-lg font-medium">监控</Link>
           <Link href="/config" className="block py-2 text-lg font-medium">配置</Link>
           <Link href="/sla" className="block py-2 text-lg font-medium">协议</Link>
           <Link href="/contact" className="block py-2 text-lg font-medium">支持</Link>
