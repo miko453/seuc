@@ -1,235 +1,187 @@
-
 "use client";
 
-import { Navigation } from "@/components/Navigation";
-import { GlitchOverlay } from "@/components/GlitchOverlay";
-import { HeroAnnouncement } from "@/components/HeroAnnouncement";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
-  Zap, Boxes, Network, Globe, Cpu, Database, Activity, HardDrive, ShieldCheck, ChevronRight, Terminal, ShoppingCart, CloudOff
+  Info, AlertTriangle, ExternalLink, RefreshCcw, 
+  Cpu, Database, CreditCard, Activity, Users, 
+  TrendingUp, ShieldCheck, HelpCircle, Network
 } from "lucide-react";
-import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DynamicOutageList } from "@/components/DynamicOutageList";
-import { PRODUCTS } from "@/lib/satire-data";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [lagTime, setLagTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      // 模拟村口时差：当前时间 - 12小时
+      const date = new Date(Date.now() - 12 * 60 * 60 * 1000);
+      setLagTime(date.toLocaleTimeString('zh-CN', { hour12: false }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative min-h-screen bg-background">
-      <GlitchOverlay />
-      <Navigation />
-      
-      {/* Hero Section - IDC Style */}
-      <section className="relative py-24 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background border-b border-primary/10 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4 relative z-10">
-          <HeroAnnouncement />
-          <div className="max-w-3xl">
-            <h1 className="text-6xl font-headline font-black mb-6 leading-[1.1] tracking-tighter text-white">
-              专业的 <span className="text-primary italic">超开</span> 云计算<br />
-              <span className="text-accent underline decoration-primary decoration-4">赋能每一份被绿的信任</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 font-light max-w-xl italic">
-              “地窖架构”先行者。内存超卖 1000%，带宽全靠邻居老王，让您的应用在玄学中优雅奔跑。
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/80 font-black px-10 h-14 text-lg" asChild>
-                <Link href="/products">立即开启受骗之旅</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/5 px-8 h-14" asChild>
-                <Link href="/beian">进行终身备案</Link>
-              </Button>
-            </div>
-          </div>
+    <div className="max-w-7xl mx-auto px-6 space-y-8">
+      {/* Welcome Banner */}
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-[#202124]">控制台概览</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            欢迎回来，大槐树村管理员。当前村口时差 (-12H): {lagTime}
+          </p>
         </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" className="text-xs h-8 bg-white border-[#dadce0] text-[#3c4043] hover:bg-[#f8f9fa]">
+            <RefreshCcw className="h-3.5 w-3.5 mr-2" /> 刷新 (并无卵用)
+          </Button>
+          <Button size="sm" className="text-xs h-8 bg-primary hover:bg-primary/90">
+            自定义
+          </Button>
+        </div>
+      </header>
+
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        {/* Decorative Grid */}
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none overflow-hidden">
-          <div className="grid grid-cols-10 gap-2 rotate-12">
-            {Array.from({ length: 100 }).map((_, i) => (
-              <div key={i} className="h-8 w-8 border border-primary/30 rounded-sm animate-pulse" style={{ animationDelay: `${i * 10}ms` }} />
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Project Info Card */}
+        <Card className="console-card">
+          <CardHeader className="p-4 border-b border-[#f1f3f4]">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-[#3c4043]">
+              <Info className="h-4 w-4 text-primary" /> 项目信息
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 space-y-4">
+            <div className="space-y-1">
+              <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">项目名称</p>
+              <p className="text-sm font-medium">大槐树村-prod-01</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">项目 ID</p>
+              <p className="text-sm font-medium font-mono text-primary">village-duck-9527</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">当前资产 (走丢鸭子数)</p>
+              <p className="text-sm font-medium">420,690,1337</p>
+            </div>
+            <div className="pt-2 border-t border-[#f1f3f4]">
+              <Button variant="link" className="p-0 h-auto text-xs text-primary font-bold">前往项目设置</Button>
+            </div>
+          </CardContent>
+        </Card>
 
-      <main className="max-w-[1400px] mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          
-          {/* Main Content Area (75%) */}
-          <div className="lg:col-span-3 space-y-16">
-            
-            {/* Featured Section */}
-            <div>
-              <div className="flex items-center justify-between mb-8 border-b border-primary/10 pb-4">
-                <div className="flex items-center gap-3">
-                  <div className="bg-primary/20 p-2 rounded">
-                    <Boxes className="h-5 w-5 text-primary" />
-                  </div>
-                  <h2 className="text-2xl font-bold uppercase tracking-tighter italic">核心受骗业务</h2>
-                </div>
-                <Link href="/products" className="text-sm text-primary hover:underline flex items-center gap-1 font-bold">
-                  进入产品中心 (WHMCS 模式) <ChevronRight className="h-4 w-4" />
-                </Link>
+        {/* Resources Card */}
+        <Card className="console-card">
+          <CardHeader className="p-4 border-b border-[#f1f3f4]">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-[#3c4043]">
+              <Cpu className="h-4 w-4 text-primary" /> 资源概览 (超开状态)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Compute Engine (发电机)</span>
+                <Badge variant="destructive" className="text-[10px] rounded-sm px-1 py-0 h-4">99+ 宕机</Badge>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {PRODUCTS.slice(0, 6).map(product => (
-                  <Card key={product.id} className="bg-card/40 border-primary/10 hover:border-accent transition-all group relative overflow-hidden">
-                    <CardHeader className="pb-2">
-                      <div className="flex justify-between items-start mb-2">
-                        <Badge variant="outline" className="text-[9px] font-mono uppercase bg-primary/5 text-primary border-primary/20">{product.category}</Badge>
-                      </div>
-                      <CardTitle className="text-lg font-bold flex items-center gap-2">
-                        {product.id.includes('v') && <Cpu className="h-4 w-4" />}
-                        {product.id === 'db' && <Database className="h-4 w-4" />}
-                        {product.id === 'oss' && <HardDrive className="h-4 w-4" />}
-                        {product.id === 'cdn' && <Network className="h-4 w-4" />}
-                        {product.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-xs text-muted-foreground line-clamp-2 h-8">{product.description}</p>
-                      <div className="flex justify-between items-end pt-4 border-t border-primary/5">
-                        <div>
-                          <span className="text-[10px] opacity-50 block font-mono">起步受骗价</span>
-                          <span className="text-xl font-black text-primary font-mono">${product.price}<span className="text-[10px] font-normal text-muted-foreground">/{product.unit}</span></span>
-                        </div>
-                        <Button size="sm" variant="default" className="bg-primary text-white h-9 font-bold" asChild>
-                          <Link href={`/products/${product.id}`}>
-                            立即受骗
-                          </Link>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Cloud Storage (地窖)</span>
+                <Badge variant="outline" className="text-[10px] rounded-sm px-1 py-0 h-4 text-orange-500 border-orange-200">1个 (漏水中)</Badge>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm">村口信鸽带宽</span>
+                <span className="text-sm font-mono text-destructive font-bold">0.01 bps</span>
+              </div>
+              <div className="pt-2 border-t border-[#f1f3f4]">
+                <Button variant="link" className="p-0 h-auto text-xs text-primary font-bold">查看所有资源</Button>
               </div>
             </div>
+          </CardContent>
+        </Card>
 
-            {/* Satirical Marketing Banner */}
-            <div className="bg-primary/5 border-2 border-dashed border-primary/20 rounded-2xl p-10 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-              <div className="absolute -right-10 -bottom-10 opacity-5">
-                <Terminal className="h-64 w-64" />
-              </div>
-              <div className="flex-1 space-y-4 relative z-10">
-                <Badge className="bg-accent text-black font-bold uppercase">HOT ISSUE</Badge>
-                <h3 className="text-4xl font-headline font-black italic tracking-tighter italic">地窖 3.0：全面兼容“老王 WiFi”</h3>
-                <p className="text-muted-foreground text-lg italic">
-                  我们优化了信鸽的飞行路径，现在即使村口老王在下载 4K 广场舞，您的 1KB 流量也能在 24 小时内准时送达。
-                </p>
-                <Button className="bg-accent text-black font-black px-8 h-12" asChild>
-                  <Link href="/products">抢先受骗</Link>
-                </Button>
-              </div>
+        {/* Billing Card */}
+        <Card className="console-card">
+          <CardHeader className="p-4 border-b border-[#f1f3f4]">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-[#3c4043]">
+              <CreditCard className="h-4 w-4 text-primary" /> 结算 (韭菜生长)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 space-y-4">
+            <div className="flex items-end gap-2">
+              <span className="text-3xl font-bold tracking-tighter text-destructive">-$8,420.00</span>
+              <span className="text-[10px] text-muted-foreground pb-1 font-mono">/ 每分钟</span>
             </div>
+            <p className="text-[10px] text-muted-foreground italic leading-tight">
+              预测本月结余：卖房还债。系统已自动开启“资产转移至村长账户”功能。
+            </p>
+            <div className="h-16 w-full bg-muted/30 rounded flex items-center justify-center border border-dashed border-[#dadce0]">
+              <TrendingUp className="h-8 w-8 text-destructive opacity-20" />
+            </div>
+            <div className="pt-2 border-t border-[#f1f3f4]">
+              <Button variant="link" className="p-0 h-auto text-xs text-primary font-bold">前往割韭菜中心</Button>
+            </div>
+          </CardContent>
+        </Card>
 
-          </div>
-
-          {/* Right Sidebar (25%) */}
-          <aside className="lg:col-span-1 space-y-8">
+        {/* Dynamic Outage (Activity) Card */}
+        <Card className="console-card md:col-span-2">
+          <CardHeader className="p-4 border-b border-[#f1f3f4]">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-[#3c4043]">
+              <Activity className="h-4 w-4 text-primary" /> 实时事故 (活动日志)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
             <DynamicOutageList />
-            
-            <Card className="bg-card border-primary/10 p-5">
-              <h4 className="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2 text-primary">
-                <div className="h-2 w-2 rounded-full bg-primary animate-ping" />
-                基础设施状态
-              </h4>
-              <div className="space-y-4">
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-[10px] uppercase font-mono">
-                    <span>信鸽存活率</span>
-                    <span className="text-accent">12.5%</span>
-                  </div>
-                  <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                    <div className="h-full bg-accent w-[12.5%]" />
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-[10px] uppercase font-mono">
-                    <span>机房老鼠活跃度</span>
-                    <span className="text-primary">99% (忙碌)</span>
-                  </div>
-                  <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                    <div className="h-full bg-primary w-[99%]" />
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-[10px] uppercase font-mono">
-                    <span>技术员发量</span>
-                    <span className="text-destructive">0% (已秃)</span>
-                  </div>
-                  <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                    <div className="h-full bg-destructive w-[2%]" />
-                  </div>
-                </div>
-              </div>
-              <Button variant="ghost" className="w-full mt-4 h-8 text-[10px] font-mono text-primary/60" asChild>
-                <Link href="/nodes">查看实时节点探针 <ChevronRight className="h-3 w-3" /></Link>
-              </Button>
-            </Card>
+          </CardContent>
+        </Card>
 
-            <div className="p-8 bg-primary/5 border border-dashed border-primary/30 rounded-xl text-center relative group overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-primary/20 animate-pulse" />
-              <Activity className="h-10 w-10 mx-auto text-primary mb-4 animate-bounce" />
-              <p className="text-[10px] font-mono uppercase text-muted-foreground font-bold">平均跑路速度</p>
-              <p className="text-4xl font-black text-primary font-mono tracking-tighter">0.03s</p>
-              <p className="text-[9px] mt-3 opacity-60 italic">
-                “从您点击支付，到我们技术员消失在村口，仅需瞬息之间。”
-              </p>
+        {/* API Card */}
+        <Card className="console-card">
+          <CardHeader className="p-4 border-b border-[#f1f3f4]">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-[#3c4043]">
+              <Network className="h-4 w-4 text-primary" /> API 与服务 (老王波段)
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm">
+                <div className="h-1.5 w-1.5 rounded-full bg-destructive animate-ping" />
+                <span className="text-[#3c4043]">村口公共广播 API</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span className="text-[#3c4043]">邻居 WiFi 嗅探服务</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span className="text-[#3c4043]">信鸽路径优化引擎</span>
+              </div>
             </div>
-          </aside>
-        </div>
-      </main>
+            <div className="pt-6 border-t border-[#f1f3f4] mt-4">
+              <Button variant="link" className="p-0 h-auto text-xs text-primary font-bold">转至 API 概览</Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
-      <footer className="py-20 border-t border-primary/10 bg-card/40">
-        <div className="max-w-[1400px] mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <CloudOff className="h-6 w-6 text-primary" />
-              <span className="font-headline font-bold text-lg tracking-tighter">村口云</span>
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              全球首家“地窖架构”云服务商。我们不生产流量，我们只是隔壁老王 WiFi 的搬运工。
-            </p>
+      {/* Satirical Support Section */}
+      <section className="bg-[#e8f0fe] rounded-lg p-6 flex items-center justify-between border border-[#d2e3fc]">
+        <div className="flex items-center gap-4">
+          <div className="bg-primary/10 p-2 rounded-full">
+            <HelpCircle className="h-6 w-6 text-primary" />
           </div>
-          <div className="space-y-4">
-            <h5 className="text-sm font-bold uppercase tracking-widest text-primary">受骗指南</h5>
-            <ul className="space-y-2 text-xs text-muted-foreground font-light">
-              <li><Link href="/products" className="hover:text-primary">选购受骗方案</Link></li>
-              <li><Link href="/beian" className="hover:text-primary">进行梦幻备案</Link></li>
-              <li><Link href="/nodes" className="hover:text-primary">查看监控探针</Link></li>
-              <li>老王杂货铺 (硬件部)</li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h5 className="text-sm font-bold uppercase tracking-widest text-primary">法律豁免</h5>
-            <ul className="space-y-2 text-xs text-muted-foreground font-light">
-              <li><Link href="/sla" className="hover:text-primary">跑路免责协议</Link></li>
-              <li><Link href="/tos" className="hover:text-primary">谁看啊服务条款</Link></li>
-              <li><Link href="/contact" className="hover:text-primary">投诉建议 (无用)</Link></li>
-              <li>数据捐赠协议</li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h5 className="text-sm font-bold uppercase tracking-widest text-primary">村口生态</h5>
-            <div className="flex gap-4">
-              <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center cursor-help border border-primary/20">
-                <Globe className="h-5 w-5" />
-              </div>
-              <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center cursor-help border border-primary/20">
-                <Terminal className="h-5 w-5" />
-              </div>
-            </div>
-            <p className="text-[10px] text-muted-foreground italic">
-              关注公众号“村口老王”，解锁更多被绿姿势。
-            </p>
+          <div>
+            <h4 className="font-semibold text-sm text-[#1967d2]">需要村长亲自帮助？</h4>
+            <p className="text-xs text-[#5f6368]">村长正在地头忙碌，响应时间约为：等到他孙子结婚（预计 2099 年）。</p>
           </div>
         </div>
-        <div className="text-center opacity-30 text-[10px] font-mono uppercase tracking-[0.3em] px-4">
-          © 2024 CUNKOU CLOUD · NO SLA · NO REFUNDS · NO BRAIN · POWERED BY OLD WANG'S WIFI & VILLAGE CHIEF'S GENERATOR
-        </div>
-      </footer>
+        <Button variant="outline" className="bg-white text-xs border-[#1a73e8] text-[#1a73e8] hover:bg-[#e8f0fe] font-bold">
+          提交工单 (立即忽略)
+        </Button>
+      </section>
     </div>
   );
 }
