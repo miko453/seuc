@@ -160,6 +160,7 @@ export default function NodesPage() {
       setNodes(prev => prev.map(node => {
         if (node.status === 'offline') return node;
         
+        // 模拟数据随机波动
         const newCpu = Math.min(200, Math.max(0, node.cpu + (Math.random() - 0.5) * 15));
         const newTemp = Math.min(130, Math.max(-20, node.temp + (Math.random() - 0.5) * 8));
         
