@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Server, Database, HardDrive, LayoutGrid, 
   ChevronRight, ShoppingCart, Filter, Info, 
-  Cpu, Globe, ShieldCheck, Layers, Boxes, Bird, Mail, Key
+  Cpu, Globe, ShieldCheck, Layers, Boxes
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
