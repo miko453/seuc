@@ -1,0 +1,23 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "village-datacenter",
+      "description": "A cramped, dusty room with old computers acting as a data center.",
+      "imageUrl": "https://picsum.photos/seed/cloud1/800/600",
+      "imageHint": "messy server room"
+    },
+    {
+      "id": "black-internet",
+      "description": "A dark abstract representation of a glitchy network.",
+      "imageUrl": "https://picsum.photos/seed/cloud2/800/600",
+      "imageHint": "digital glitch"
+    },
+    {
+      "id": "over-selling",
+      "description": "A visual representation of many things being squeezed into one small space.",
+      "imageUrl": "https://picsum.photos/seed/cloud3/800/600",
+      "imageHint": "crowded space"
+    }
+  ]
+}
