@@ -12,14 +12,13 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Zap, AlertTriangle, ChevronLeft, Loader2, 
-  ShoppingCart, Hourglass, CheckCircle2, XCircle, Cpu, HardDrive, Network, Globe
+  ShoppingCart, Hourglass, CheckCircle2, XCircle, Cpu, HardDrive, Network, Globe, Layers
 } from "lucide-react";
 import { 
   Dialog, DialogContent, DialogHeader, 
   DialogTitle, DialogDescription, DialogFooter 
 } from "@/components/ui/dialog";
 import Link from "next/link";
-import { useToast } from "@/hooks/use-toast";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -33,7 +32,16 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   // Dynamic config states
   const [configValues, setConfigValues] = useState<Record<string, any>>({});
 
-  const { toast } = useToast();
+  useEffect(() => {
+    if (product) {
+      const initial: Record<string, any> = {};
+      product.options.forEach(opt => {
+        if (opt.type === 'slider' && opt.range) initial[opt.label] = opt.range.min;
+        else if (opt.items.length > 0) initial[opt.label] = opt.items[0];
+      });
+      setConfigValues(initial);
+    }
+  }, [product]);
 
   if (!product) {
     return (
@@ -65,7 +73,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       }
       setProgress(currentProgress);
       setCurrentEvent(QUEUE_EVENTS[Math.floor(Math.random() * QUEUE_EVENTS.length)]);
-    }, 1000);
+    }, 800);
   };
 
   const updateConfig = (label: string, value: any) => {
@@ -83,11 +91,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           <div className="lg:col-span-2 space-y-12">
             <header className="space-y-4">
               <div className="flex items-center gap-3">
-                <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">{product.category}</Badge>
-                <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest font-bold">ID: {product.id}</span>
+                <Badge className="bg-primary/10 text-primary border-primary/20">{product.category}</Badge>
+                <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest font-bold">SPEC_ID: {product.id.toUpperCase()}</span>
               </div>
               <h1 className="text-5xl font-headline font-black italic tracking-tighter text-foreground">
-                定制你的 <span className="text-primary">{product.title}</span>
+                配置您的 <span className="text-primary">{product.title}</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed italic">
                 {product.description}
@@ -99,14 +107,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <section key={idx} className="space-y-6">
                   <div className="flex justify-between items-center border-b border-primary/10 pb-2">
                     <h3 className="text-lg font-bold italic flex items-center gap-2">
-                      {option.label.includes('CPU') && <Cpu className="h-4 w-4" />}
-                      {option.label.includes('内存') && <Zap className="h-4 w-4" />}
-                      {option.label.includes('硬盘') && <HardDrive className="h-4 w-4" />}
-                      {option.label.includes('网络') && <Globe className="h-4 w-4" />}
+                      {option.label.includes('CPU') && <Cpu className="h-4 w-4 text-primary" />}
+                      {option.label.includes('内存') && <Zap className="h-4 w-4 text-primary" />}
+                      {option.label.includes('硬盘') || option.label.includes('空间') ? <HardDrive className="h-4 w-4 text-primary" /> : null}
+                      {option.label.includes('网络') || option.label.includes('带宽') ? <Globe className="h-4 w-4 text-primary" /> : null}
+                      {option.label.includes('操作系统') || option.label.includes('版本') ? <Layers className="h-4 w-4 text-primary" /> : null}
                       {option.label}
                     </h3>
                     {option.type === 'slider' && (
-                      <Badge variant="outline" className="text-accent border-accent">
+                      <Badge variant="outline" className="text-accent border-accent font-mono">
                         {configValues[option.label] || option.range?.min} {option.range?.unit}
                       </Badge>
                     )}
@@ -115,19 +124,23 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   {option.type === 'slider' && option.range && (
                     <div className="px-2 pt-4">
                       <Slider 
-                        defaultValue={[option.range.min]}
+                        value={[configValues[option.label] || option.range.min]}
                         max={option.range.max}
                         min={option.range.min}
                         step={option.range.step}
                         onValueChange={(val) => updateConfig(option.label, val[0])}
                         className="[&_.relative]:bg-primary"
                       />
+                      <div className="flex justify-between mt-2 text-[10px] font-mono opacity-50">
+                        <span>{option.range.min} {option.range.unit}</span>
+                        <span>{option.range.max} {option.range.unit}</span>
+                      </div>
                     </div>
                   )}
 
                   {option.type === 'select' && (
-                    <Select onValueChange={(val) => updateConfig(option.label, val)}>
-                      <SelectTrigger className="w-full bg-white border-2 border-primary/10">
+                    <Select value={configValues[option.label]} onValueChange={(val) => updateConfig(option.label, val)}>
+                      <SelectTrigger className="w-full bg-white border-2 border-primary/10 h-12">
                         <SelectValue placeholder={`选择${option.label}...`} />
                       </SelectTrigger>
                       <SelectContent>
@@ -138,15 +151,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </Select>
                   )}
 
-                  {(option.type === 'radio' || !option.type) && (
+                  {option.type === 'radio' && (
                     <RadioGroup 
-                      defaultValue={option.items[0]} 
+                      value={configValues[option.label]} 
                       className="grid grid-cols-1 md:grid-cols-2 gap-4"
                       onValueChange={(val) => updateConfig(option.label, val)}
                     >
                       {option.items.map((item, i) => (
-                        <div key={i} className="flex items-center space-x-3 border-2 border-transparent p-4 rounded-xl bg-white shadow-sm hover:border-primary/40 transition-all cursor-pointer group">
-                          <RadioGroupItem value={item} id={`${idx}-${i}`} className="text-primary border-primary/20" />
+                        <div key={i} className={`flex items-center space-x-3 border-2 p-4 rounded-xl bg-white shadow-sm transition-all cursor-pointer group ${configValues[option.label] === item ? 'border-primary' : 'border-transparent hover:border-primary/40'}`}>
+                          <RadioGroupItem value={item} id={`${idx}-${i}`} className="text-primary" />
                           <Label htmlFor={`${idx}-${i}`} className="flex flex-col cursor-pointer flex-1">
                             <span className="font-bold text-sm group-hover:text-primary transition-colors">{item}</span>
                           </Label>
@@ -155,7 +168,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </RadioGroup>
                   )}
                   
-                  <p className="text-[11px] text-muted-foreground italic font-mono bg-primary/5 p-2 rounded">
+                  <p className="text-[11px] text-muted-foreground italic font-mono bg-primary/5 p-3 rounded-lg border border-primary/10">
                     ⚠️ 风险提示：{option.hint}
                   </p>
                 </section>
@@ -168,7 +181,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <h4 className="font-black uppercase tracking-tighter text-xl italic">受骗告知书</h4>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed italic font-medium">
-                点击“确认下单”即表示您已充分理解：本业务的稳定性取决于村口老王家无线路由器的心情。我们保留在任何时候（尤其是技术员小王想去上网时）关停服务的权利，且不提供任何形式的退款（因为钱已经花了）。
+                点击“确认下单”即表示您已充分理解：本业务的所有硬件规格仅供参考（指脑补）。
+                我们保留在发电机没油、村长心情不好、或老王改 WiFi 密码时随时中断服务的权利。
               </p>
             </section>
           </div>
@@ -177,23 +191,23 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <Card className="border-4 border-primary shadow-2xl overflow-hidden rounded-2xl bg-white">
               <CardHeader className="bg-primary text-white p-6">
                 <div className="flex justify-between items-center">
-                  <CardTitle className="text-sm uppercase font-black tracking-widest">实时账单 (一本正经)</CardTitle>
+                  <CardTitle className="text-sm uppercase font-black tracking-widest">动态账单 (实打实扣)</CardTitle>
                   <ShoppingCart className="h-4 w-4 opacity-50" />
                 </div>
               </CardHeader>
               <CardContent className="p-8 space-y-6">
                 <div className="space-y-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">基础配置费</span>
+                    <span className="text-muted-foreground">基础月租</span>
                     <span className="font-black">${product.price} / {product.unit}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">超开税 (1000%)</span>
-                    <span className="font-black text-destructive">$1,299.99</span>
+                    <span className="text-muted-foreground">硬件超开附加费</span>
+                    <span className="font-black text-destructive">$1,299.00</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">发电机折旧费</span>
-                    <span className="font-black">$45.00</span>
+                    <span className="text-muted-foreground">技术员午餐费</span>
+                    <span className="font-black">$25.00</span>
                   </div>
                   <div className="flex justify-between text-sm text-destructive font-bold">
                     <span className="flex items-center gap-1">跑路保险 (强制) <AlertTriangle className="h-3 w-3" /></span>
@@ -203,16 +217,16 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
                 <div className="pt-6 border-t border-primary/20 space-y-4">
                   <div className="flex justify-between items-end">
-                    <span className="font-black text-lg">预计总计:</span>
+                    <span className="font-black text-lg">当前应付:</span>
                     <div className="text-right">
-                      <p className="text-3xl font-black text-primary italic leading-none">
-                        ${(parseFloat(product.price) + 1844.99).toFixed(2)}
+                      <p className="text-4xl font-black text-primary italic leading-none">
+                        ${(parseFloat(product.price) + 1824).toFixed(2)}
                       </p>
-                      <p className="text-[10px] text-muted-foreground mt-1 uppercase font-bold tracking-widest">每{product.unit}</p>
+                      <p className="text-[10px] text-muted-foreground mt-1 uppercase font-bold tracking-widest">初次入坑费</p>
                     </div>
                   </div>
                   <p className="text-[9px] text-center text-muted-foreground italic leading-tight">
-                    * 最终扣费以村长收到的五花肉斤数为准。
+                    * 最终扣费以村委会收到的五花肉斤数为准。
                   </p>
                 </div>
               </CardContent>
@@ -225,7 +239,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   {isProcessing ? (
                     <><Hourglass className="mr-2 h-5 w-5 animate-spin" /> 正在贿赂...</>
                   ) : (
-                    "确认下单 (立即破产)"
+                    "确认下单 (立即入坑)"
                   )}
                 </Button>
               </CardFooter>
@@ -233,17 +247,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             
             <div className="mt-8 p-4 border border-primary/20 bg-primary/5 rounded-xl text-center space-y-2">
               <p className="text-[10px] font-mono font-bold text-primary flex items-center justify-center gap-2">
-                <CheckCircle2 className="h-3 w-3" /> 合规性: 村级 5A 认证
-              </p>
-              <p className="text-[9px] text-muted-foreground italic">
-                本页面已由老王家的大黄狗进行内容审核，确保没有任何实话。
+                <CheckCircle2 className="h-3 w-3" /> 认证: 村级 5A 受骗机构
               </p>
             </div>
           </aside>
         </div>
       </main>
 
-      {/* Queueing / Result Dialog */}
       <Dialog open={showQueue} onOpenChange={(open) => !isProcessing && setShowQueue(open)}>
         <DialogContent className="sm:max-w-md border-4 border-primary p-8">
           <DialogHeader className="text-center space-y-4">
@@ -257,7 +267,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               )}
             </div>
             <DialogTitle className="text-2xl font-black italic tracking-tighter">
-              {isProcessing ? "正在处理您的请求..." : orderResult?.success ? "下单成功 (绝无可能)" : "下单失败 (意料之中)"}
+              {isProcessing ? "处理请求中..." : "下单失败"}
             </DialogTitle>
             <DialogDescription className="text-foreground font-medium italic">
               {isProcessing ? currentEvent : orderResult?.message}
@@ -278,9 +288,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <DialogFooter className="sm:justify-center">
               <Button 
                 onClick={() => setShowQueue(false)}
-                className={orderResult?.success ? "bg-primary" : "bg-destructive"}
+                className="bg-destructive hover:bg-destructive/80"
               >
-                {orderResult?.success ? "前往虚构控制台" : "我知道了，我是大冤种"}
+                我知道了，我是大冤种
               </Button>
             </DialogFooter>
           )}
