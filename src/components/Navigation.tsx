@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { CloudOff, Menu, X, Activity, FileText, LayoutGrid, MessageSquare, Terminal, Search } from "lucide-react";
+import { CloudOff, Menu, X, Terminal, Search, ShoppingBag, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,10 +23,12 @@ export function Navigation() {
             </Link>
 
             <div className="hidden lg:flex items-center space-x-6">
-              <Link href="/" className="text-sm font-medium hover:text-accent transition-colors">产品</Link>
+              <Link href="/products" className="text-sm font-medium hover:text-accent transition-colors flex items-center gap-1.5">
+                <ShoppingBag className="h-3.5 w-3.5" /> 产品中心
+              </Link>
               <Link href="/nodes" className="text-sm font-medium hover:text-accent transition-colors">节点探针</Link>
-              <Link href="/sla" className="text-sm font-medium hover:text-accent transition-colors">服务保障</Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-accent transition-colors">生态合作</Link>
+              <Link href="/sla" className="text-sm font-medium hover:text-accent transition-colors">跑路协议</Link>
+              <Link href="/contact" className="text-sm font-medium hover:text-accent transition-colors">投诉无门</Link>
             </div>
           </div>
 
@@ -34,21 +36,18 @@ export function Navigation() {
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
               <Input 
-                placeholder="搜索‘跑路’或‘老王’..." 
+                placeholder="搜索‘跑路’或‘余额截图’..." 
                 className="h-8 pl-9 bg-card/50 border-primary/20 text-xs focus-visible:ring-accent"
               />
             </div>
           </div>
 
           <div className="hidden md:flex items-center space-x-4 shrink-0">
-            <Link href="/dashboard" className="text-xs font-mono text-primary flex items-center gap-1 hover:underline">
-              <Terminal className="h-3 w-3" /> 控制台
+            <Link href="/beian" className="text-xs font-mono text-primary flex items-center gap-1 hover:underline">
+              <ShieldCheck className="h-3 w-3" /> 备案 (梦里)
             </Link>
-            <Button variant="outline" size="sm" className="h-8 border-primary/30 text-xs px-4" asChild>
-              <Link href="/tos">备案 (梦里)</Link>
-            </Button>
             <Button size="sm" className="h-8 bg-primary hover:bg-primary/80 text-white font-bold text-xs" asChild>
-              <Link href="/login">登录/注册</Link>
+              <Link href="/login">进入受骗入口</Link>
             </Button>
           </div>
 
@@ -62,12 +61,12 @@ export function Navigation() {
 
       {isOpen && (
         <div className="md:hidden bg-card border-b border-primary/20 px-4 pt-2 pb-6 space-y-2">
-          <Link href="/" className="block py-2 text-sm">产品中心</Link>
+          <Link href="/products" className="block py-2 text-sm font-bold">产品中心</Link>
           <Link href="/nodes" className="block py-2 text-sm">监控中心</Link>
+          <Link href="/beian" className="block py-2 text-sm">备案管理</Link>
           <Link href="/sla" className="block py-2 text-sm">跑路协议</Link>
-          <Link href="/contact" className="block py-2 text-sm">投诉无果</Link>
-          <Button className="w-full mt-4 bg-primary text-white h-9" asChild>
-            <Link href="/dashboard">进入控制台</Link>
+          <Button className="w-full mt-4 bg-primary text-white h-9 font-bold" asChild>
+            <Link href="/login">立即受骗</Link>
           </Button>
         </div>
       )}
