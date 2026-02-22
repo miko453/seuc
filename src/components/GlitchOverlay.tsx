@@ -1,20 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertCircle, RefreshCcw, Skull, WifiOff } from "lucide-react";
+import { RefreshCcw, WifiOff } from "lucide-react";
 
 export function GlitchOverlay() {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const triggerRandomError = () => {
-      // 8% chance of triggering a random "Village 502" error every 12 seconds
-      if (Math.random() < 0.08) {
+      // 10% 概率触发随机 502，模拟“村口 CDN”极其不稳定的特性
+      if (Math.random() < 0.10) {
         setShowError(true);
       }
     };
 
-    const interval = setInterval(triggerRandomError, 12000);
+    const interval = setInterval(triggerRandomError, 15000);
     return () => clearInterval(interval);
   }, []);
 
@@ -22,24 +22,24 @@ export function GlitchOverlay() {
 
   return (
     <div className="fixed inset-0 z-[9999] bg-[#0c1a0e] flex flex-col items-center justify-center p-6 text-center animate-flicker">
-      <div className="max-w-md space-y-6">
+      <div className="max-w-md space-y-6 bg-black/40 backdrop-blur-md p-8 border-4 border-primary shadow-[0_0_50px_rgba(34,197,94,0.4)] rounded-xl">
         <div className="relative">
           <WifiOff className="h-24 w-24 text-primary mx-auto animate-glitch" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/20 blur-xl rounded-full" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/20 blur-2xl rounded-full" />
         </div>
         
         <div className="space-y-2">
           <h1 className="text-4xl font-headline font-bold text-primary italic uppercase tracking-tighter">
-            村口边缘节点 502 报错
+            村口边缘节点 502 瘫痪
           </h1>
-          <p className="text-accent font-mono text-xs uppercase tracking-widest">
-            CDN 状态: 邻居拔了电源线
+          <p className="text-accent font-mono text-xs uppercase tracking-widest font-bold">
+            CDN 状态: 邻居改了 WiFi 密码
           </p>
         </div>
         
         <p className="text-muted-foreground font-mono text-sm leading-relaxed">
           报错原因：地窖里的服务器被猫尿了，或者村长家的大黄狗正在撕咬网线。
-          请稍后再试，或者直接去村口找老王。
+          请尝试去村口找老王协商，或者等我们的技术员小王手摇发电恢复。
         </p>
         
         <div className="pt-8">
@@ -54,8 +54,8 @@ export function GlitchOverlay() {
 
         <div className="pt-12 font-mono text-[9px] text-muted-foreground/40 space-y-1">
           <p>故障 ID: VILLAGE-{Math.random().toString(36).substring(7).toUpperCase()}-DIJIAO-EDGE</p>
-          <p>CDN 节点: 村口桥头-机房-03</p>
-          <p>协议版本: IPoAC (鸽子载体协议) - 丢包严重</p>
+          <p>CDN 节点: 村口桥头-机房-03 (漏电模式)</p>
+          <p>协议版本: IPoAC (鸽子载体协议) - 丢包 99%</p>
         </div>
       </div>
     </div>
