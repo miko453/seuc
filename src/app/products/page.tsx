@@ -1,4 +1,3 @@
-
 "use client";
 
 import { PRODUCTS } from "@/lib/satire-data";
@@ -8,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Server, Database, HardDrive, LayoutGrid, 
   ChevronRight, ShoppingCart, Filter, Info, 
-  Cpu, Globe, ShieldCheck, Layers, Boxes
+  Cpu, Globe, ShieldCheck, Layers, Boxes, Mail, Network
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -26,7 +25,7 @@ export default function ProductsPage() {
     switch(category) {
       case '计算': return <Cpu className="h-5 w-5" />;
       case '存储': return <HardDrive className="h-5 w-5" />;
-      case '网络': return <Globe className="h-5 w-5" />;
+      case '网络': return <Network className="h-5 w-5" />;
       case '数据库': return <Database className="h-5 w-5" />;
       case '平台': return <Layers className="h-5 w-5" />;
       case '安全': return <ShieldCheck className="h-5 w-5" />;

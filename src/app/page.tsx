@@ -1,9 +1,9 @@
 "use client";
 
 import { 
-  Zap, ShieldCheck, ShoppingCart, ArrowRight,
+  Zap, ArrowRight,
   Wifi, Database, Terminal,
-  CloudOff, Network, Layers, Boxes, Cpu, HardDrive, Globe
+  CloudOff, Network, Cpu, HardDrive, ShoppingCart, Globe
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

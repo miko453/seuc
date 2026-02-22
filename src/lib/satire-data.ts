@@ -35,18 +35,17 @@ export const PRODUCTS: ProductConfig[] = [
   {
     id: "gpu-beast",
     title: "GPU 服务器 (GTX 440 胶带版)",
-    description: "通过透明胶带并联的垃圾显卡阵列。虽然只有 4C 8G，但支持扫雷 4K。",
+    description: "通过透明胶带并联的垃圾显卡阵列。支持扫雷 4K，是村里最顶级的算力。",
     price: "88.00",
     unit: "月",
     category: "计算",
-    features: ["GTX 440 满血版", "手摇散热", "1000% 超开"],
+    features: ["GTX 440 满血版", "手持散热", "1000% 超开"],
     options: [
-      { label: "显卡型号", items: ["GTX 440 (带尘)", "GT 210 (静音即死)", "S3 Trio64"], hint: "GTX 440 是村里最顶级的算力。", type: 'radio' },
+      { label: "显卡型号", items: ["GTX 440 (带尘)", "GT 210 (静音即死)", "S3 Trio64"], hint: "GTX 440 已经是顶配了。", type: 'radio' },
       { label: "vCPU 核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "地窖发电机上限就是 4 核。", type: 'slider' },
       { label: "物理内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "再多发电机就要冒烟了。", type: 'slider' },
       { label: "数据盘", items: [], range: { min: 10, max: 1024, step: 10, unit: 'GB' }, hint: "上限 1TB，再多地窖装不下了。", type: 'slider' },
-      { label: "网络带宽", items: ["56kbps 拨号", "1Mbps 老王 WiFi", "信鸽转发"], hint: "带宽越高，掉线越快。", type: 'radio' },
-      { label: "出口节点", items: ["地窖出口", "村长办公室", "老王后院"], hint: "决定了数据的风味。", type: 'select' }
+      { label: "出口节点", items: ["地窖出口", "村长办公室", "老王后院"], hint: "节点决定了数据的风味。", type: 'select' }
     ]
   },
   {
@@ -58,10 +57,25 @@ export const PRODUCTS: ProductConfig[] = [
     category: "计算",
     features: ["共享 IPv4", "10Mbps 邻居宽带", "跑路保障"],
     options: [
-      { label: "CPU 核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "采用 2005 年的奔腾分芯。", type: 'slider' },
-      { label: "内存大小", items: [], range: { min: 0.5, max: 8, step: 0.5, unit: 'GB' }, hint: "实际可用视邻居下载情况而定。", type: 'slider' },
-      { label: "硬盘空间", items: [], range: { min: 20, max: 1024, step: 20, unit: 'GB' }, hint: "由多个二手 16G U 盘组成。", type: 'slider' },
-      { label: "出口节点", items: ["客厅电线杆", "书房窗户口"], hint: "信号强度取决于窗帘厚度。", type: 'select' }
+      { label: "核心配置", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "采用 2005 年的奔腾分芯。", type: 'slider' },
+      { label: "内存配置", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "实际可用视邻居下载情况而定。", type: 'slider' },
+      { label: "硬盘配置", items: [], range: { min: 20, max: 1024, step: 20, unit: 'GB' }, hint: "由二手 U 盘组成。", type: 'slider' },
+      { label: "网络环境", items: ["老王 WiFi", "拨号上网"], hint: "老王睡觉后会自动断网。", type: 'radio' }
+    ]
+  },
+  {
+    id: "dedicated-head",
+    title: "裸金属服务器 (村长桌面版)",
+    description: "独占村长家的联想开天台式机。性能稳定，除非村长孙子要玩 4399。",
+    price: "299.00",
+    unit: "月",
+    category: "计算",
+    features: ["物理独占", "大屁股显示器", "带写字台空间"],
+    options: [
+      { label: "核心分配", items: [], range: { min: 2, max: 4, step: 1, unit: 'C' }, hint: "村长要求留两核看新闻。", type: 'slider' },
+      { label: "内存大小", items: [], range: { min: 2, max: 8, step: 2, unit: 'GB' }, hint: "已经是这台机器的极限了。", type: 'slider' },
+      { label: "存储容量", items: [], range: { min: 80, max: 1024, step: 40, unit: 'GB' }, hint: "使用的是古老的 IDE 硬盘。", type: 'slider' },
+      { label: "出口节点", items: ["村长卧室", "村委会大厅"], hint: "卧室节点信号稍弱。", type: 'select' }
     ]
   },
 
@@ -75,10 +89,25 @@ export const PRODUCTS: ProductConfig[] = [
     category: "存储",
     features: ["物理隔绝", "防潮防灾", "读取靠挖"],
     options: [
-      { label: "计算规格", items: ["单核(挖土用)", "双核(自动深挖)"], hint: "用于驱动挖掘机读取数据。", type: 'radio' },
-      { label: "内存配置", items: [], range: { min: 0.5, max: 4, step: 0.5, unit: 'GB' }, hint: "用于缓存咸菜味数据。", type: 'slider' },
-      { label: "存储容量", items: [], range: { min: 10, max: 1024, step: 10, unit: 'GB' }, hint: "1TB 需要占用后院一平米。", type: 'slider' },
-      { label: "运输方式", items: ["驴车 (5kbps)", "二锅头贿赂版", "信鸽空运"], hint: "驴车虽然慢，但它不丢包。", type: 'radio' }
+      { label: "计算性能", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "决定了挖掘机读取速度。", type: 'slider' },
+      { label: "内存缓冲", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "缓存咸菜味数据。", type: 'slider' },
+      { label: "存储容量", items: [], range: { min: 100, max: 1024, step: 100, unit: 'GB' }, hint: "1TB 需占用后院两平米。", type: 'slider' },
+      { label: "缸体等级", items: ["瓦缸 (普通)", "瓷缸 (VIP)", "不锈钢缸 (尊贵)"], hint: "不锈钢缸防锈效果最好。", type: 'radio' }
+    ]
+  },
+  {
+    id: "tape-basement",
+    title: "磁带归档 (地窖磁带库)",
+    description: "采用回收的录音带进行数据存储。虽然读取时有杂音，但极具复古情怀。",
+    price: "0.005",
+    unit: "GB",
+    category: "存储",
+    features: ["磁带存储", "杂音加密", "读取需倒带"],
+    options: [
+      { label: "驱动性能", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表随身听的电机功率。", type: 'slider' },
+      { label: "暂存内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "防震缓存大小。", type: 'slider' },
+      { label: "总容量", items: [], range: { min: 50, max: 1024, step: 50, unit: 'GB' }, hint: "地窖里的磁带存货有限。", type: 'slider' },
+      { label: "出口节点", items: ["地窖窗口", "老王广播站"], hint: "广播站节点支持广播读取。", type: 'select' }
     ]
   },
 
@@ -86,15 +115,31 @@ export const PRODUCTS: ProductConfig[] = [
   {
     id: "dns-loudspeaker",
     title: "大喇叭权威解析 (DNS)",
-    description: "采用村口大喇叭进行广播式域名解析，全球（村）可见。",
+    description: "采用村口大喇叭进行广播式域名解析。解析成功率取决于播音员嗓门。",
     price: "2.00",
     unit: "月",
     category: "网络",
-    features: ["模拟信号解析", "人工纠错", "支持 1 条 A 记录"],
+    features: ["模拟信号解析", "人工纠错", "嗓门加密"],
     options: [
-      { label: "解析核心", items: [], range: { min: 1, max: 2, step: 1, unit: 'C' }, hint: "核心越多，喇叭声音越大。", type: 'slider' },
-      { label: "内存缓冲", items: [], range: { min: 0.1, max: 1, step: 0.1, unit: 'GB' }, hint: "用于记录老王的笔记。", type: 'slider' },
-      { label: "解析延迟", items: ["1小时 (播音员在)", "24小时 (播音员睡觉)", "随缘"], hint: "建议选随缘，心态更平稳。", type: 'radio' }
+      { label: "解析规格", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表播音员的人数。", type: 'slider' },
+      { label: "内存缓冲", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "播音员的小本本容量。", type: 'slider' },
+      { label: "存储容量", items: [], range: { min: 1, max: 1024, step: 1, unit: 'GB' }, hint: "用于存放历史解析记录。", type: 'slider' },
+      { label: "解析频率", items: ["每小时播报", "随缘播报"], hint: "随缘播报更具艺术感。", type: 'radio' }
+    ]
+  },
+  {
+    id: "network-pigeon",
+    title: "信鸽载体协议 (IPoAC)",
+    description: "真正的离线传输。通过训练有素的鸽子投递数据包，自带丢包（指鸽子飞丢）。",
+    price: "15.00",
+    unit: "月",
+    category: "网络",
+    features: ["物理分发", "空中路由", "防鹰过滤"],
+    options: [
+      { label: "计算规格", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "自动化鸽舍的控制力。", type: 'slider' },
+      { label: "内存分配", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "鸽子腿部挂载缓冲。", type: 'slider' },
+      { label: "存储总额", items: [], range: { min: 10, max: 1024, step: 10, unit: 'GB' }, hint: "鸽笼的物理存储极限。", type: 'slider' },
+      { label: "出口节点", items: ["大槐树树冠", "村委会旗杆"], hint: "旗杆节点视野开阔。", type: 'select' }
     ]
   },
 
@@ -102,33 +147,31 @@ export const PRODUCTS: ProductConfig[] = [
   {
     id: "db-mysql",
     title: "MySQL 托管 (猫尿驱动)",
-    description: "通过在硬盘上喷洒猫尿维持磁头活性。异味加密，物理级防盗。",
+    description: "通过在硬盘上喷洒猫尿维持磁头活性。异味加密，物理级防盗（贼不敢闻）。",
     price: "19.99",
     unit: "月",
     category: "数据库",
-    features: ["MySQL 1.0", "异味加密", "不支持索引"],
+    features: ["MySQL 1.0", "异味加密", "全表扫描专用"],
     options: [
-      { label: "计算核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "核心数越多，味道越冲。", type: 'slider' },
-      { label: "内存分配", items: [], range: { min: 0.5, max: 8, step: 0.5, unit: 'GB' }, hint: "用于脑补查询缓存。", type: 'slider' },
-      { label: "硬盘大小", items: [], range: { min: 10, max: 1024, step: 10, unit: 'GB' }, hint: "建议不要存太多，猫尿会溢出。", type: 'slider' },
-      { label: "出口节点", items: ["地窖排风口", "村长家厨房"], hint: "排风口节点气味最浓郁。", type: 'select' }
+      { label: "数据库规格", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "味道越冲，性能越强。", type: 'slider' },
+      { label: "缓冲区内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "用于脑补查询结果。", type: 'slider' },
+      { label: "数据库空间", items: [], range: { min: 5, max: 1024, step: 5, unit: 'GB' }, hint: "建议不要存太多，猫尿会溢出。", type: 'slider' },
+      { label: "存储节点", items: ["地窖排风口", "村长家厨房"], hint: "排风口节点最具特色。", type: 'select' }
     ]
   },
-
-  // --- 安全 (Security) ---
   {
-    id: "anti-complaint",
-    title: "地窖抗投诉服务器 (无视一切)",
-    description: "物理级抗投诉。由于服务器在地窖里且上锁，任何投诉信都寄不进去。",
-    price: "150.00",
+    id: "db-redis-memory",
+    title: "Redis 缓存 (村长短时记忆)",
+    description: "完全基于内存。实际上是技术员小王蹲在地窖里拿着纸笔手动记录。",
+    price: "9.90",
     unit: "月",
-    category: "安全",
-    features: ["物理防火墙(挂锁)", "电磁屏蔽(土层)", "防跨省(找不到路)"],
+    category: "数据库",
+    features: ["纯手工记录", "断电即失忆", "充满人文关怀"],
     options: [
-      { label: "CPU 核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "抗投诉专用低频 U。", type: 'slider' },
-      { label: "加密内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "阅后即焚（指漏电）。", type: 'slider' },
-      { label: "加密硬盘", items: [], range: { min: 100, max: 1024, step: 100, unit: 'GB' }, hint: "数据一旦写入，村长也找不回来。", type: 'slider' },
-      { label: "带宽类型", items: ["纯净水拨号", "泥炭宽带", "老王 WiFi"], hint: "泥炭宽带最抗投诉，因为根本不通。", type: 'radio' }
+      { label: "书写核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表小王的出汗量。", type: 'slider' },
+      { label: "大脑内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "小王脑补的上限。", type: 'slider' },
+      { label: "纸张空间", items: [], range: { min: 1, max: 1024, step: 1, unit: 'GB' }, hint: "也就是小王带的笔记本数量。", type: 'slider' },
+      { label: "笔迹等级", items: ["草书 (快)", "楷书 (慢但准)", "涂鸦 (看缘分)"], hint: "涂鸦节点通常会返回 404。", type: 'radio' }
     ]
   },
 
@@ -136,47 +179,95 @@ export const PRODUCTS: ProductConfig[] = [
   {
     id: "paas-hand-crank",
     title: "PaaS (手摇应用引擎)",
-    description: "完全托管。所有 API 请求由小王手动回复 JSON，充满人文关怀。",
+    description: "完全托管。所有 API 请求由小王手动回复 JSON，回复内容随机但诚恳。",
     price: "50.00",
     unit: "月",
     category: "平台",
-    features: ["手工 JSON", "支持 SQL 盲注(手动回复)", "出口节点可选"],
+    features: ["手工回复", "离线部署", "出口节点可选"],
     options: [
-      { label: "计算性能", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表小王摇手柄的频率。", type: 'slider' },
-      { label: "暂存内存", items: [], range: { min: 0.5, max: 4, step: 0.5, unit: 'GB' }, hint: "小王的短期记忆上限。", type: 'slider' },
-      { label: "应用空间", items: [], range: { min: 5, max: 500, step: 5, unit: 'GB' }, hint: "写在墙上的代码量。", type: 'slider' },
-      { label: "并发处理量", items: ["1 Req/H", "5 Req/H", "10 Req/H"], hint: "小王写字速度上限是每小时 10 条。", type: 'radio' },
-      { label: "出口节点", items: ["村口大喇叭", "李大妈厨房", "地窖出口"], hint: "决定了 JSON 里的错别字频率。", type: 'select' }
+      { label: "核心规格", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "小王手摇手柄的频率。", type: 'slider' },
+      { label: "内存分配", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "短期记忆容量。", type: 'slider' },
+      { label: "应用存储", items: [], range: { min: 10, max: 1024, step: 10, unit: 'GB' }, hint: "也就是小王墙上的草稿纸。", type: 'slider' },
+      { label: "出口节点", items: ["村口大喇叭", "李大妈厨房"], hint: "大喇叭节点响应最广。", type: 'select' }
+    ]
+  },
+  {
+    id: "saas-leek",
+    title: "SaaS (全自动韭菜收割机)",
+    description: "一键部署。专门用于分析全村资产并自动生成扣费单，是村长的最爱。",
+    price: "99.00",
+    unit: "月",
+    category: "平台",
+    features: ["自动收割", "大数据脑补", "全村兼容"],
+    options: [
+      { label: "收割核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表收割的密集程度。", type: 'slider' },
+      { label: "暂存内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "用于存放临时韭菜名单。", type: 'slider' },
+      { label: "账单存储", items: [], range: { min: 10, max: 1024, step: 10, unit: 'GB' }, hint: "账单堆叠高度。", type: 'slider' },
+      { label: "收割强度", items: ["温柔 (9.9折)", "狠辣 (99.9% 扣款)", "根除"], hint: "根除模式下会直接导致用户破产。", type: 'radio' }
+    ]
+  },
+
+  // --- 安全 (Security) ---
+  {
+    id: "anti-complaint",
+    title: "抗投诉服务器 (地窖物理屏蔽)",
+    description: "由于服务器在地窖里且加了三把锁，任何律师函和投诉信都寄不进去。",
+    price: "150.00",
+    unit: "月",
+    category: "安全",
+    features: ["物理防火墙", "挂锁加密", "法律隔离"],
+    options: [
+      { label: "屏蔽核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "地窖通风扇的数量。", type: 'slider' },
+      { label: "加密内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "抗电磁干扰级别。", type: 'slider' },
+      { label: "防护硬盘", items: [], range: { min: 100, max: 1024, step: 100, unit: 'GB' }, hint: "防锈图层厚度。", type: 'slider' },
+      { label: "出口节点", items: ["地窖窗口", "老王后院地洞"], hint: "地洞节点最隐蔽。", type: 'select' }
+    ]
+  },
+  {
+    id: "waf-dog",
+    title: "大黄狗防火墙 (WAF)",
+    description: "村口大黄狗亲自蹲守。任何可疑流量都会引发一阵狗叫，从而吓退黑客。",
+    price: "35.00",
+    unit: "月",
+    category: "安全",
+    features: ["声感拦截", "自动防御", "生物识别"],
+    options: [
+      { label: "防御核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "大黄狗的兴奋程度。", type: 'slider' },
+      { label: "警告内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "狗叫声的分贝上限。", type: 'slider' },
+      { label: "日志空间", items: [], range: { min: 1, max: 1024, step: 1, unit: 'GB' }, hint: "用于存放被啃坏的网线。", type: 'slider' },
+      { label: "出口节点", items: ["狗窝旁", "电线杆下"], hint: "狗窝旁防御力最强。", type: 'select' }
     ]
   },
 
   // --- 其他 (Other) ---
   {
-    id: "email-pigeon",
-    title: "信鸽邮件服务器 (专业反垃圾)",
-    description: "通过训练有素的鸽子投递邮件。自带垃圾邮件过滤（鸽子不叼垃圾）。",
-    price: "15.00",
-    unit: "月",
-    category: "其他",
-    features: ["物理分发", "自带加密", "支持回复"],
-    options: [
-      { label: "投递性能", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表鸽笼的自动化程度。", type: 'slider' },
-      { label: "附件内存", items: [], range: { min: 0.5, max: 2, step: 0.5, unit: 'GB' }, hint: "鸽子腿上能绑的重量。", type: 'slider' },
-      { label: "信箱容量", items: [], range: { min: 1, max: 100, step: 1, unit: 'GB' }, hint: "也就是鸽棚的大小。", type: 'slider' },
-      { label: "信鸽等级", items: ["肉鸽 (入门)", "赛鸽 (极速)", "野鸽 (随缘)"], hint: "赛鸽最快，但容易被老鹰抓。", type: 'radio' }
-    ]
-  },
-  {
     id: "ssl-stamp",
-    title: "SSL 证书 (村长亲自盖章)",
-    description: "由于没有 CA 机构授权，由大槐树村长亲自按红泥章，浏览器必报红。",
+    title: "SSL 证书 (村长按红泥章)",
+    description: "由村长亲自加盖公章。浏览器必然报红，但代表了全村的公信力。",
     price: "99.00",
     unit: "年",
     category: "其他",
-    features: ["物理印章", "村长背书", "有效期 3 天"],
+    features: ["物理印章", "村长背书", "有效期三天"],
     options: [
-      { label: "印章等级", items: ["DV (村口红章)", "OV (村长私章)", "EV (手指印)"], hint: "红章最正式，手指印最鬼畜。", type: 'radio' },
-      { label: "存储容量", items: [], range: { min: 1, max: 10, step: 1, unit: 'GB' }, hint: "用于存放印章扫描件。", type: 'slider' }
+      { label: "印章性能", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "代表印泥的饱和度。", type: 'slider' },
+      { label: "证书内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "扫描件的清晰度。", type: 'slider' },
+      { label: "存储容量", items: [], range: { min: 1, max: 1024, step: 1, unit: 'GB' }, hint: "印章扫描件存放点。", type: 'slider' },
+      { label: "印章等级", items: ["DV (红泥)", "OV (私章)", "EV (手指印)"], hint: "手指印等级最高。", type: 'radio' }
+    ]
+  },
+  {
+    id: "email-pigeon-pro",
+    title: "邮件服务器 (信鸽专业版)",
+    description: "支持回复功能。每封邮件由鸽子叼回村长办公室，充满古朴的质感。",
+    price: "25.00",
+    unit: "月",
+    category: "其他",
+    features: ["双向投递", "自带反垃圾", "物理回执"],
+    options: [
+      { label: "投递核心", items: [], range: { min: 1, max: 4, step: 1, unit: 'C' }, hint: "鸽舍自动化程度。", type: 'slider' },
+      { label: "附件内存", items: [], range: { min: 1, max: 8, step: 1, unit: 'GB' }, hint: "鸽子腿上能绑的重量。", type: 'slider' },
+      { label: "信箱空间", items: [], range: { min: 5, max: 1024, step: 5, unit: 'GB' }, hint: "其实就是鸽棚的大小。", type: 'slider' },
+      { label: "信鸽品种", items: ["肉鸽 (入门)", "赛鸽 (极速)"], hint: "肉鸽可能会被半路抓去炖了。", type: 'radio' }
     ]
   }
 ];
