@@ -42,48 +42,48 @@ export const PRODUCTS: ProductConfig[] = [
       { label: "显卡型号", items: ["GTX 440 (带尘版)", "GT 210 (静音即死亡)", "S3 Trio64 (复古算力)"], hint: "GTX 440 具备 1GB 珍贵显存，足以处理您的 8bit 贴图。", type: 'radio' },
       { label: "vCPU 核心", items: [], range: { min: 1, max: 128, step: 1, unit: 'vCPU' }, hint: "虽然你选了 128 核，但实际上它们都在共享同一个生锈的风扇。", type: 'slider' },
       { label: "物理内存", items: [], range: { min: 4, max: 1024, step: 4, unit: 'GB' }, hint: "超过 16GB 后，技术员小王会尝试用 U 盘充当虚拟内存。", type: 'slider' },
-      { label: "系统盘 (地窖机械)", items: ["20GB HDD", "40GB HDD", "80GB (村长家拆的)"], hint: "机械硬盘读写时会发出悦耳的咯吱声，有助于睡眠。", type: 'radio' }
+      { label: "系统盘", items: ["20GB HDD", "40GB HDD", "80GB (村长家拆的)"], hint: "机械硬盘读写时会发出悦耳的咯吱声，有助于睡眠。", type: 'radio' }
     ]
   },
   {
-    id: "vps-elastic",
-    title: "弹性云服务器 (轻量版)",
-    description: "真正的一键弹性。1 核 CPU 看起来像 32 核，跑起来连 Hello World 都费劲。",
-    price: "0.15",
-    unit: "小时",
+    id: "vps-standard",
+    title: "虚拟专用服务器 (VPS)",
+    description: "经典超开 VPS。内存超开 1:1000，邻居老王不改密码绝不断网。",
+    price: "5.00",
+    unit: "月",
     category: "计算",
-    features: ["手摇发电冗余", "邻居 WiFi 接入", "随机内核崩溃"],
+    features: ["共享 IPv4 (18层转发)", "100Mbps (邻居带宽)", "全自动跑路保障"],
     options: [
-      { label: "vCPU 核心", items: [], range: { min: 1, max: 32, step: 1, unit: 'vCPU' }, hint: "核心越多，邻居老王家跳闸的概率越高。", type: 'slider' },
-      { label: "内存容量", items: [], range: { min: 0.5, max: 512, step: 0.5, unit: 'GB' }, hint: "内存超开比例为 1:100，建议不要运行超过 2 行的代码。", type: 'slider' },
-      { label: "系统盘", items: [], range: { min: 10, max: 500, step: 10, unit: 'GB' }, hint: "硬盘由村口废品站回收的 5400 转硬盘组成。", type: 'slider' },
-      { label: "公网带宽", items: ["56kbps 拨号", "1Mbps (老王睡觉时)", "10Gbps (内网空气)"], hint: "10Gbps 是技术员小王手拉手传输的速度。", type: 'select' }
+      { label: "vCPU 核心", items: [], range: { min: 1, max: 64, step: 1, unit: 'vCPU' }, hint: "核心数取决于技术员小王的心情。", type: 'slider' },
+      { label: "内存容量", items: [], range: { min: 0.5, max: 256, step: 0.5, unit: 'GB' }, hint: "实际可用约为选定值的 0.01%。", type: 'slider' },
+      { label: "硬盘空间", items: [], range: { min: 10, max: 500, step: 10, unit: 'GB' }, hint: "存储在村长家地窖的旧硬盘中。", type: 'slider' },
+      { label: "操作系统", items: ["Windows XP", "CentOS 5", "DOS 6.22"], hint: "不建议安装任何现代系统。", type: 'select' }
     ]
   },
   {
-    id: "nat-vps-套娃",
-    title: "NAT 服务器 (18层套娃版)",
-    description: "极致共享 IP。通过 18 层 NAT 转发，您的出口 IP 可能在南极，也可能在村长办公室。",
+    id: "lighthouse",
+    title: "轻量应用服务器",
+    description: "专为轻量业务设计。虽然我们叫它“轻量”，但它跑起来可能比砖头还沉。",
     price: "2.50",
     unit: "月",
     category: "计算",
-    features: ["共享 IP", "端口随机漂移", "自带 10 个内网端口"],
+    features: ["一键坏账", "流量包按羽计费", "自带 502 特效"],
     options: [
-      { label: "NAT 转发层数", items: ["1层 (直连老王)", "9层 (九九归一)", "18层 (地狱难度)"], hint: "层数越多，延迟越高，越能锻炼您的耐心。", type: 'radio' },
-      { label: "映射端口数", items: ["5个", "10个", "20个 (需打点小王)"], hint: "端口会在由于停电重启后随机变换，请随时检查。", type: 'radio' }
+      { label: "套餐规格", items: ["基础受骗版", "进阶韭菜版", "终极冤种版"], hint: "套餐越高，被绿得越快。", type: 'radio' },
+      { label: "数据中心", items: ["大槐树村-A", "李大妈家-B", "咸菜坛子-C"], hint: "物理位置随机漂移。", type: 'select' }
     ]
   },
   {
-    id: "rdp-desktop",
-    title: "远程桌面 (网吧模拟器)",
-    description: "完全托管的远程桌面。内置《扫雷》、《蜘蛛纸牌》，让您重温 2005 年的网吧激情。",
-    price: "15.00",
+    id: "bare-metal",
+    title: "独立服务器 (裸金属)",
+    description: "村长家台式机托管。真正的独享硬件，支持物理散热（指技术员对着吹气）。",
+    price: "500.00",
     unit: "月",
     category: "计算",
-    features: ["WinXP 经典皮肤", "内置万能显卡驱动", "支持挂机升级"],
+    features: ["物理隔离(指上锁)", "手摇发电冗余", "真·1:1 算力"],
     options: [
-      { label: "系统环境", items: ["Windows XP (SP2)", "Windows 2000", "MS-DOS"], hint: "XP 系统已由村长亲自打补丁，安全性全靠缘分。", type: 'select' },
-      { label: "分辨率限制", items: ["640x480", "800x600", "1024x768 (尊享)"], hint: "过高的分辨率会导致地窖显卡阵列起火。", type: 'radio' }
+      { label: "处理器型号", items: ["奔腾 4", "赛扬 D", "龙芯 1A (收藏版)"], hint: "高性能处理器，冬天可取暖。", type: 'radio' },
+      { label: "内存插槽", items: ["1条 (256MB)", "2条 (512MB)", "全满 (1GB)"], hint: "满血显存，傲视全村。", type: 'radio' }
     ]
   },
 
@@ -102,31 +102,55 @@ export const PRODUCTS: ProductConfig[] = [
     ]
   },
   {
-    id: "drive-big-pigeon",
-    title: "大硬盘服务器 (信鸽备份)",
-    description: "物理级灾备。数据通过信鸽定时飞往邻村地窖存储，防黑客但防不住老鹰。",
-    price: "50.00",
-    unit: "TB",
+    id: "disk-beast",
+    title: "大硬盘服务器",
+    description: "海量存储方案。由 50 块旧笔记本硬盘拼凑而成，读写时噪音足以防贼。",
+    price: "99.00",
+    unit: "月",
     category: "存储",
-    features: ["按羽计费", "物理防劫持", "随机丢包(指被吃)"],
+    features: ["2TB+ 物理空间", "随机扇区损坏", "自带异味加密"],
     options: [
-      { label: "硬盘数量", items: ["1块 (二手笔记本)", "4块 (阵列模式)", "10块 (地窖满载)"], hint: "10块硬盘同时转动时，噪音足以吵醒村里所有的狗。", type: 'radio' },
-      { label: "备份频率", items: ["每日 (鸽子很累)", "每周 (随缘)", "每世纪 (传家)"], hint: "备份频率越高，需要的谷子开销越大。", type: 'select' }
+      { label: "磁盘容量", items: [], range: { min: 100, max: 2048, step: 100, unit: 'GB' }, hint: "扩容需要技术员现场加装胶带。", type: 'slider' },
+      { label: "RAID 模式", items: ["RAID 0 (追求自毁)", "JBOD (一锅端)", "村长备份 (手动拷走)"], hint: "不建议开启任何冗余模式。", type: 'select' }
     ]
   },
 
   // --- 网络 (Network) ---
   {
-    id: "cdn-pigeon-global",
-    title: "CDN 加速 (信鸽全球分发)",
-    description: "基于物理层面的边缘节点。通过在各村口布置鸽舍，实现数据的近场分发。",
+    id: "cdn-pigeon",
+    title: "内容分发网络 (CDN)",
+    description: "信鸽全球加速。利用物理层面的信鸽载体协议，实现数据的近场（指村口）分发。",
     price: "0.99",
     unit: "GB",
     category: "网络",
-    features: ["极低延迟(指鸽子飞得快)", "支持 10 种语言(指叫声)", "纯物理防火墙"],
+    features: ["物理层加速", "抗劫持(鸽子不识字)", "流量按羽计算"],
     options: [
-      { label: "流量包", items: ["10GB (10只鸽子)", "100GB (一群鸽子)", "1TB (饱和式覆盖)"], hint: "如果遇到老鹰出没，流量包会自动损耗 50%。", type: 'radio' },
-      { label: "加速区域", items: ["大槐树村", "全镇覆盖", "县城边缘 (极速)"], hint: "县城边缘节点可能会因为电线杆太多导致鸽子迷路。", type: 'select' }
+      { label: "信鸽品种", items: ["普通肉鸽 (低延迟)", "赛鸽 (极速版)", "特工鸽 (加密传输)"], hint: "赛鸽套餐包含意外保险（防老鹰）。", type: 'radio' },
+      { label: "流量包大小", items: ["10GB (10只鸽子)", "100GB (一群鸽子)", "1TB (全村出动)"], hint: "超额流量将转化为等值玉米扣除。", type: 'radio' }
+    ]
+  },
+  {
+    id: "ipv6-only",
+    title: "IPv6-Only 服务器",
+    description: "极致纯净。由于我们买不起 IPv4 资源，所以您的业务将处于一个没人找得到的网络中。",
+    price: "1.00",
+    unit: "月",
+    category: "网络",
+    features: ["海量 IP (全是 0)", "零延迟(因为没人访问)", "自带防黑客属性"],
+    options: [
+      { label: "子网掩码长度", items: ["/64 (基础受骗)", "/48 (豪华受难)", "/32 (祖传网络)"], hint: "掩码越短，存在的虚无感越强。", type: 'radio' }
+    ]
+  },
+  {
+    id: "dns-village",
+    title: "DNS 托管 (大喇叭解析)",
+    description: "高可靠解析。当有人查询您的域名时，村委会大喇叭会实时播报对应的 IP 地址。",
+    price: "0.50",
+    unit: "月",
+    category: "网络",
+    features: ["语音解析", "全球(村)同步", "支持 TTL 调节(取决于播音员语速)"],
+    options: [
+      { label: "解析频率", items: ["整点播报", "随时插播", "村长吃饭时除外"], hint: "插播解析可能产生额外的噪音税。", type: 'select' }
     ]
   },
 
@@ -144,10 +168,48 @@ export const PRODUCTS: ProductConfig[] = [
       { label: "缓冲池内存", items: [], range: { min: 128, max: 4096, step: 128, unit: 'MB' }, hint: "内存不足时，我们会将数据缓存到技术员小王的脑子里。", type: 'slider' }
     ]
   },
+  {
+    id: "redis-salt",
+    title: "Redis 缓存 (咸盐加速版)",
+    description: "极速 KV 存储。我们将数据保存在村长家的电饭煲里，读取速度取决于米饭熟没熟。",
+    price: "4.50",
+    unit: "月",
+    category: "数据库",
+    features: ["单线程自燃", "持久化靠脑补", "数据有效期 5 分钟"],
+    options: [
+      { label: "内存限额", items: [], range: { min: 16, max: 512, step: 16, unit: 'MB' }, hint: "超过 64MB 后，电饭煲会报警。", type: 'slider' }
+    ]
+  },
+
+  // --- 平台 (Platform) ---
+  {
+    id: "saas-jiucai",
+    title: "SaaS 全自动收韭菜系统",
+    description: "行业领先的韭菜管理平台。一键部署，实现从播种到收割的全流程自动化。",
+    price: "199.00",
+    unit: "月",
+    category: "平台",
+    features: ["智能收割算法", "韭菜心理分析", "自动导出为财务报表"],
+    options: [
+      { label: "收割力度", items: ["温柔对待", "连根拔起", "寸草不生"], hint: "力度越大，回本越快，跑路概率越高。", type: 'radio' }
+    ]
+  },
+  {
+    id: "baas-hand",
+    title: "BaaS (手摇后端服务)",
+    description: "完全托管的后端。您的每一个 API 请求都会由技术员小王手动处理并返回 JSON。",
+    price: "50.00",
+    unit: "月",
+    category: "平台",
+    features: ["人类智慧解析", "响应时间 4-6 小时", "支持 SQL 盲注(手动)"],
+    options: [
+      { label: "响应速度", items: ["正常人 (慢)", "小王 (快)", "老王 (随缘)"], hint: "选老王的话，他可能直接把你请求删了。", type: 'select' }
+    ]
+  },
 
   // --- 安全 (Security) ---
   {
-    id: "ssl-stamp-village",
+    id: "ssl-stamp",
     title: "SSL 证书 (村长盖章认证)",
     description: "顶级 CA 签发。全绿加密图标，浏览器会显示‘村长已阅’安全提示。",
     price: "5.00",
@@ -159,15 +221,29 @@ export const PRODUCTS: ProductConfig[] = [
     ]
   },
   {
-    id: "ddos-physical-shield",
-    title: "抗投诉 (地窖物理屏蔽)",
-    description: "绝对的物理隔绝。当检测到攻击或投诉时，技术员会直接拔掉电源线。",
+    id: "ddos-shield",
+    title: "抗投诉服务器",
+    description: "绝对的物理屏蔽。当检测到投诉或攻击时，技术员会直接拔掉电源线。",
     price: "199.00",
     unit: "月",
     category: "安全",
     features: ["物理防火墙(指上锁)", "拔线保护", "0 漏警"],
     options: [
       { label: "防护等级", items: ["入门 (拔网线)", "专业 (断电)", "终极 (水泥封箱)"], hint: "水泥封箱模式下，数据将获得永久的安全（指永远无法访问）。", type: 'radio' }
+    ]
+  },
+
+  // --- 其他 (Other) ---
+  {
+    id: "mail-pigeon",
+    title: "邮件托管 (信鸽搬运版)",
+    description: "真正不被监听的邮件。信鸽一对一搬运，支持回复附件（指带根玉米）。",
+    price: "15.00",
+    unit: "月",
+    category: "其他",
+    features: ["绝对隐私", "无垃圾邮件(鸽子不吃)", "物理送达"],
+    options: [
+      { label: "邮箱容量", items: ["10封/月", "50封 (尊享)", "不限量 (累死鸽子)"], hint: "邮件过多会导致信鸽罢工。", type: 'select' }
     ]
   }
 ];
