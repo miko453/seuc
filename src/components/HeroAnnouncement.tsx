@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertCircle, Clock } from "lucide-react";
+import { AlertCircle, Clock, Zap } from "lucide-react";
 import { ANNOUNCEMENTS } from "@/lib/satire-data";
 
 export function HeroAnnouncement() {
@@ -12,7 +12,8 @@ export function HeroAnnouncement() {
 
   useEffect(() => {
     const updateTime = () => {
-      const date = new Date(Date.now() - 24 * 60 * 60 * 1000);
+      // 12小时时差逻辑
+      const date = new Date(Date.now() - 12 * 60 * 60 * 1000);
       setLagTime(date.toLocaleTimeString('zh-CN', { hour12: false }));
     };
     
@@ -24,8 +25,8 @@ export function HeroAnnouncement() {
       setTimeout(() => {
         setIndex((prev) => (prev + 1) % ANNOUNCEMENTS.length);
         setIsGlitching(false);
-      }, 200);
-    }, 6000);
+      }, 150);
+    }, 8000);
 
     return () => {
       clearInterval(interval);
@@ -34,14 +35,15 @@ export function HeroAnnouncement() {
   }, []);
 
   return (
-    <div className={`inline-flex flex-col md:flex-row items-center gap-4 mb-10 transition-all duration-200 ${isGlitching ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-      <div className="flex items-center gap-2 px-4 py-1.5 text-xs font-mono font-bold tracking-widest text-accent border border-accent/30 rounded-full bg-accent/5">
-        <AlertCircle className="h-3 w-3 animate-pulse" />
-        <span>[ 系统噩耗 ]：{ANNOUNCEMENTS[index]}</span>
+    <div className={`inline-flex flex-col md:flex-row items-center gap-4 mb-6 transition-all duration-200 ${isGlitching ? 'opacity-50 scale-[0.98]' : 'opacity-100 scale-100'}`}>
+      <div className="flex items-center gap-2 px-3 py-1 text-[10px] font-mono font-bold text-accent border border-accent/30 rounded bg-accent/5">
+        <Zap className="h-3 w-3 animate-pulse" />
+        <span className="uppercase tracking-widest">CRITICAL ERROR:</span>
+        <span className="text-foreground">{ANNOUNCEMENTS[index]}</span>
       </div>
-      <div className="flex items-center gap-2 px-3 py-1.5 text-[10px] font-mono font-bold text-muted-foreground border border-primary/20 rounded-full">
+      <div className="flex items-center gap-2 px-3 py-1 text-[10px] font-mono font-bold text-muted-foreground border border-primary/20 rounded bg-card/40">
         <Clock className="h-3 w-3" />
-        <span>延迟时间同步: {lagTime}</span>
+        <span>村口时差 (-12H): {lagTime}</span>
       </div>
     </div>
   );
